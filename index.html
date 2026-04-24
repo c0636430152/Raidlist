@@ -36,7 +36,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -117,14 +119,28 @@
         }
 
         @keyframes pulse-ring {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.4); opacity: 0; }
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
         }
 
         /* Entry Animations */
         @keyframes slideUpFade {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .animate-item {
@@ -142,7 +158,10 @@
         .btn-glow::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: linear-gradient(120deg, #9146FF, #ff416c, #00c9ff, #9146FF);
             background-size: 300%;
             z-index: -1;
@@ -160,9 +179,17 @@
         }
 
         @keyframes animate-gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         /* Grade Badges */
@@ -179,12 +206,35 @@
             min-width: 48px;
         }
 
-        .badge-t1 { background: linear-gradient(135deg, #FACC15 0%, #F59E0B 100%); color: #451A03; box-shadow: 0 2px 10px rgba(250,204,21,0.2); }
-        .badge-t2p { background: linear-gradient(135deg, #22D3EE 0%, #3B82F6 100%); color: #FFFFFF; box-shadow: 0 2px 10px rgba(34,211,238,0.2); }
-        .badge-t2  { background: linear-gradient(135deg, #A855F7 0%, #D946EF 100%); color: #FFFFFF; box-shadow: 0 2px 10px rgba(168,85,247,0.2); }
-        .badge-t3  { background: linear-gradient(135deg, #4B5563 0%, #6B7280 100%); color: #F3F4F6; }
-        .badge-offline { background: rgba(255, 255, 255, 0.05); color: #9CA3AF; border: 1px solid rgba(255, 255, 255, 0.1); }
-        
+        .badge-t1 {
+            background: linear-gradient(135deg, #FACC15 0%, #F59E0B 100%);
+            color: #451A03;
+            box-shadow: 0 2px 10px rgba(250, 204, 21, 0.2);
+        }
+
+        .badge-t2p {
+            background: linear-gradient(135deg, #22D3EE 0%, #3B82F6 100%);
+            color: #FFFFFF;
+            box-shadow: 0 2px 10px rgba(34, 211, 238, 0.2);
+        }
+
+        .badge-t2 {
+            background: linear-gradient(135deg, #A855F7 0%, #D946EF 100%);
+            color: #FFFFFF;
+            box-shadow: 0 2px 10px rgba(168, 85, 247, 0.2);
+        }
+
+        .badge-t3 {
+            background: linear-gradient(135deg, #4B5563 0%, #6B7280 100%);
+            color: #F3F4F6;
+        }
+
+        .badge-offline {
+            background: rgba(255, 255, 255, 0.05);
+            color: #9CA3AF;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         .watermark {
             pointer-events: none;
             user-select: none;
@@ -199,7 +249,8 @@
 
 <body class="relative w-full max-w-full pb-20">
     <!-- 浮水印 -->
-    <div class="fixed bottom-6 right-4 md:right-8 watermark px-3 py-2 md:px-4 md:py-2.5 rounded-xl md:rounded-2xl text-twitch font-black shadow-lg text-[9px] md:text-xs origin-bottom-right rotate-[-2deg]">
+    <div
+        class="fixed bottom-6 right-4 md:right-8 watermark px-3 py-2 md:px-4 md:py-2.5 rounded-xl md:rounded-2xl text-twitch font-black shadow-lg text-[9px] md:text-xs origin-bottom-right rotate-[-2deg]">
         <div class="flex items-center gap-1.5 md:gap-2">
             <i data-lucide="shield-alert" class="w-3 h-3 md:w-4 md:h-4"></i>
             <span>內容保密．團隊內部專用</span>
@@ -208,59 +259,88 @@
 
     <div id="app" class="w-full max-w-full">
         <!-- 標題欄 (Sticky Glass Header) -->
-        <header class="glass-header sticky top-0 z-40 shadow-2xl px-4 sm:px-8">
-            <div class="max-w-6xl mx-auto py-4 flex items-center justify-between gap-3">
-                <div class="min-w-0 flex-1 flex flex-col justify-center">
-                    <div class="flex items-center gap-3">
-                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 tracking-tighter truncate">
-                            Twitch 盟友清單
-                        </h1>
-                        <span class="hidden sm:flex items-center gap-1 bg-twitch/20 text-twitch-accent border border-twitch/30 px-3 py-1 rounded-full text-sm font-bold shadow-[0_0_15px_rgba(145,70,255,0.2)]">
-                            <i data-lucide="users" class="w-4 h-4"></i> 73位人員
-                        </span>
+        <header class="glass-header sticky top-0 z-40 shadow-2xl">
+            <!-- 頂部時間資訊列 -->
+            <div class="bg-[#0e0e10]/80 border-b border-white/5 px-4 sm:px-8 py-2">
+                <div class="max-w-6xl mx-auto flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="clock" class="w-3.5 h-3.5 text-twitch-accent"></i>
+                        <span id="current-date"
+                            class="text-xs sm:text-sm font-bold text-gray-200 tracking-wider"></span>
                     </div>
-                    <div id="status-bar" class="flex items-center gap-1.5 mt-1 text-xs md:text-sm font-bold uppercase tracking-widest truncate text-gray-500">
-                        <span class="inline-block w-1.5 h-1.5 rounded-full bg-gray-500 animate-pulse"></span> 準備連線中...
+                    <div
+                        class="text-[10px] sm:text-xs font-black text-twitch uppercase tracking-[0.2em] opacity-80 flex items-center gap-1.5">
+                        <i data-lucide="shield-check" class="w-3 h-3"></i> v3.0
                     </div>
                 </div>
-                <button id="refresh-btn" onclick="refreshLiveStatus()" class="group flex-shrink-0 btn-glow text-white px-5 py-2.5 md:px-6 md:py-3 rounded-xl md:rounded-2xl text-sm md:text-base font-black transition-all flex items-center gap-2">
-                    <span id="refresh-icon-wrapper" class="inline-block transition-transform duration-500">
-                        <i data-lucide="refresh-ccw" class="w-5 h-5 text-white"></i>
-                    </span>
-                    <span class="hidden sm:inline tracking-wider">同步實況狀態</span>
-                    <span class="sm:hidden tracking-wider">同步</span>
-                </button>
+            </div>
+
+            <div class="px-4 sm:px-8">
+                <div class="max-w-6xl mx-auto py-3.5 flex items-center justify-between gap-3">
+                    <div class="min-w-0 flex-1 flex flex-col justify-center">
+                        <div class="flex items-center gap-3">
+                            <h1
+                                class="text-2xl sm:text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 tracking-tighter truncate">
+                                Twitch 盟友清單
+                            </h1>
+                            <span
+                                class="hidden sm:flex items-center gap-1 bg-twitch/20 text-twitch-accent border border-twitch/30 px-3 py-1 rounded-full text-sm font-bold shadow-[0_0_15px_rgba(145,70,255,0.2)]">
+                                <i data-lucide="users" class="w-4 h-4"></i> 73位人員
+                            </span>
+                        </div>
+                        <div id="status-bar"
+                            class="flex items-center gap-1.5 mt-1 text-xs md:text-sm font-bold uppercase tracking-widest truncate text-gray-500">
+                            <span class="inline-block w-1.5 h-1.5 rounded-full bg-gray-500 animate-pulse"></span>
+                            準備連線中...
+                        </div>
+                    </div>
+                    <button id="refresh-btn" onclick="refreshLiveStatus()"
+                        class="group flex-shrink-0 btn-glow text-white px-5 py-2.5 md:px-6 md:py-3 rounded-xl md:rounded-2xl text-sm md:text-base font-black transition-all flex items-center gap-2">
+                        <span id="refresh-icon-wrapper" class="inline-block transition-transform duration-500">
+                            <i data-lucide="refresh-ccw" class="w-5 h-5 text-white"></i>
+                        </span>
+                        <span class="hidden sm:inline tracking-wider">同步實況狀態</span>
+                        <span class="sm:hidden tracking-wider">同步</span>
+                    </button>
+                </div>
             </div>
         </header>
 
         <main class="max-w-6xl mx-auto mt-8 px-4 sm:px-8">
-            <!-- 統計區 & 日期 -->
-            <div class="flex flex-col xl:flex-row justify-between items-start xl:items-end mb-8 gap-6">
-                <div class="space-y-1">
-                    <p class="text-xs font-black text-twitch uppercase tracking-[0.3em] flex items-center gap-2 mb-1">
-                        <i data-lucide="calendar" class="w-3.5 h-3.5"></i> 最後自動同步日期 <span class="text-[9px] opacity-50 ml-2">v3.0</span>
-                    </p>
-                    <p id="current-date" class="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-twitch-hover to-twitch-accent tracking-tighter shadow-sm"></p>
-                </div>
-                <div class="w-full xl:w-auto">
+            <!-- 統計區 -->
+            <div class="flex mb-8">
+                <div class="w-full">
                     <!-- 動態生成的統計卡片 -->
                     <div id="count-summary" class="w-full"></div>
                 </div>
             </div>
 
             <!-- 智慧排序規則提示 -->
-            <div class="relative overflow-hidden bg-gradient-to-br from-[#18181b] to-black border border-white/5 rounded-3xl p-6 md:p-8 text-white shadow-2xl mb-8 group">
-                <div class="absolute -top-32 -right-32 w-[300px] h-[300px] bg-twitch/20 blur-[100px] rounded-full group-hover:bg-twitch/30 transition-colors duration-700 pointer-events-none"></div>
-                
+            <div
+                class="relative overflow-hidden bg-gradient-to-br from-[#18181b] to-black border border-white/5 rounded-3xl p-6 md:p-8 text-white shadow-2xl mb-8 group">
+                <div
+                    class="absolute -top-32 -right-32 w-[300px] h-[300px] bg-twitch/20 blur-[100px] rounded-full group-hover:bg-twitch/30 transition-colors duration-700 pointer-events-none">
+                </div>
+
                 <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-5 md:gap-6">
-                    <div class="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-[#0e0e10] flex items-center justify-center border border-white/10 shadow-inner group-hover:scale-110 transition-transform duration-500">
+                    <div
+                        class="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-[#0e0e10] flex items-center justify-center border border-white/10 shadow-inner group-hover:scale-110 transition-transform duration-500">
                         <i data-lucide="sparkles" class="w-6 h-6 md:w-8 md:h-8 text-twitch-accent"></i>
                     </div>
                     <div>
-                        <h3 class="text-xs md:text-sm font-black text-twitch-accent mb-2 tracking-widest uppercase inline-flex items-center gap-1.5 bg-twitch-accent/10 px-3 py-1 rounded-full"><div class="w-1.5 h-1.5 rounded-full bg-twitch-accent animate-pulse"></div> Smart Sort System</h3>
+                        <h3
+                            class="text-xs md:text-sm font-black text-twitch-accent mb-2 tracking-widest uppercase inline-flex items-center gap-1.5 bg-twitch-accent/10 px-3 py-1 rounded-full">
+                            <div class="w-1.5 h-1.5 rounded-full bg-twitch-accent animate-pulse"></div> Smart Sort
+                            System
+                        </h3>
                         <p class="text-lg md:text-2xl font-bold leading-relaxed text-gray-200">
-                            系統已自動將 <span class="relative inline-block mx-1"><span class="relative z-10 text-white font-black px-1.5">正在開台</span><span class="absolute bottom-1 left-0 w-full h-2.5 bg-twitch/80 -z-10 rounded-sm"></span></span> 的盟友置頂。
-                            <span class="text-base md:text-lg text-gray-400 font-medium block mt-1">請優先揪團給位於正在開台的夥伴，若都沒人可以自己決定 🔥</span>
+                            系統已自動將 <span class="relative inline-block mx-1"><span
+                                    class="relative z-10 text-white font-black px-1.5">正在開台</span><span
+                                    class="absolute bottom-1 left-0 w-full h-2.5 bg-twitch/80 -z-10 rounded-sm"></span></span>
+                            的盟友置頂。
+                            <span
+                                class="text-base md:text-lg text-gray-400 font-medium block mt-1">請優先揪團給位於正在開台的夥伴，若都沒人可以自己決定
+                                🔥</span>
                         </p>
                     </div>
                 </div>
@@ -269,14 +349,17 @@
             <!-- 電腦版/手機版共用 List 容器 -->
             <div class="glass-panel rounded-3xl overflow-hidden shadow-2xl mb-12 border border-white/5">
                 <!-- 列表標頭 (僅桌面版顯示) -->
-                <div class="hidden md:flex items-center px-6 py-4 bg-[#0e0e10]/60 text-xs sm:text-sm font-black text-gray-400 uppercase tracking-widest border-b border-gray-800">
+                <div
+                    class="hidden md:flex items-center px-6 py-4 bg-[#0e0e10]/60 text-xs sm:text-sm font-black text-gray-400 uppercase tracking-widest border-b border-gray-800">
                     <div class="w-3/12 flex items-center gap-2"><i data-lucide="user" class="w-4 h-4"></i> 實況主資訊</div>
                     <div class="w-2/12 flex items-center gap-2"><i data-lucide="radio" class="w-4 h-4"></i> 頻道狀態</div>
                     <div class="w-2/12 flex items-center gap-2"><i data-lucide="link" class="w-4 h-4"></i> 頻道連結</div>
-                    <div class="w-4/12 flex items-center gap-2"><i data-lucide="file-text" class="w-4 h-4"></i> 備註簡介</div>
-                    <div class="w-1/12 text-right flex items-center justify-end gap-2"><i data-lucide="tag" class="w-4 h-4"></i> 分級</div>
+                    <div class="w-4/12 flex items-center gap-2"><i data-lucide="file-text" class="w-4 h-4"></i> 備註簡介
+                    </div>
+                    <div class="w-1/12 text-right flex items-center justify-end gap-2"><i data-lucide="tag"
+                            class="w-4 h-4"></i> 分級</div>
                 </div>
-                
+
                 <!-- 列表內容動態渲染區塊 -->
                 <div id="main-list-container" class="p-4 md:p-5 flex flex-col bg-[#141417]">
                     <!-- JS 生成項目 -->
@@ -296,7 +379,7 @@
             const timeStr = now.toLocaleTimeString('zh-TW', {
                 hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'
             });
-            document.getElementById('current-date').innerText = dateStr + ' ' + timeStr;
+            document.getElementById('current-date').innerHTML = `${dateStr} <span class="text-gray-600 mx-2">|</span><span class="text-[0.8em] text-gray-400 font-medium">${timeStr}</span>`;
         }
         updateTime();
         setInterval(updateTime, 1000);
@@ -392,7 +475,7 @@
             let liveCount = 0;
             alliesData.forEach(a => {
                 counts[a.type]++;
-                if(a.isLive) liveCount++;
+                if (a.isLive) liveCount++;
             });
 
             const summary = document.getElementById('count-summary');
@@ -475,7 +558,7 @@
                 const delay = index * 0.03; // Waterfall animation
                 const avatarFallbackUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(ally.name)}&background=18181b&color=9146FF`;
                 const avatarUrl = ally.avatar || avatarFallbackUrl;
-                
+
                 // Badges
                 const badgeStyleMap = {
                     'T1': 'badge-t1',
@@ -497,7 +580,7 @@
                            <div class="w-2.5 h-2.5 rounded-full border border-gray-600"></div>
                            <span class="text-[11px] font-bold uppercase tracking-widest">Offline</span>
                        </div>`;
-                       
+
                 const liveTagMobile = ally.isLive
                     ? `<div class="flex items-center gap-1.5 text-red-500">
                            <div class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></div>
@@ -507,8 +590,8 @@
 
                 // Intro processing
                 const hasIntro = ally.intro && ally.intro !== '-';
-                const introHtml = hasIntro 
-                    ? `<span class="text-gray-400 text-sm">「 ${ally.intro} 」</span>` 
+                const introHtml = hasIntro
+                    ? `<span class="text-gray-400 text-sm">「 ${ally.intro} 」</span>`
                     : `<span class="opacity-30 italic text-sm">無相關備註</span>`;
 
                 // Render Card Row
@@ -603,14 +686,14 @@
             const btn = document.getElementById('refresh-btn');
             const iconWrap = document.getElementById('refresh-icon-wrapper');
             const bar = document.getElementById('status-bar');
-            
+
             btn.disabled = true;
             btn.classList.add('opacity-80');
             iconWrap.classList.add('animate-spin-slow');
             bar.innerHTML = '<span class="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> <span class="text-blue-400">正在同步 Twitch 伺服器...</span>';
 
             if (!API_CONFIG.accessToken) API_CONFIG.accessToken = await getAccessToken();
-            
+
             if (API_CONFIG.accessToken) {
                 try {
                     const ids = alliesData.map(a => a.id);
@@ -641,7 +724,7 @@
                         if (userMap[lowId]) a.avatar = userMap[lowId];
                     });
                     bar.innerHTML = '<span class="inline-block w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]"></span> <span class="text-green-400 tracking-wider">● 同步成功</span>';
-                } catch (e) { 
+                } catch (e) {
                     bar.innerHTML = '<span class="text-red-500 tracking-wider flex items-center gap-1"><i data-lucide="alert-triangle" class="w-3 h-3"></i> 連線發生錯誤</span>';
                     lucide.createIcons();
                 }
@@ -649,37 +732,37 @@
                 bar.innerHTML = '<span class="text-red-500 tracking-wider flex items-center gap-1"><i data-lucide="alert-triangle" class="w-3 h-3"></i> 無法取得授權</span>';
                 lucide.createIcons();
             }
-            
-            renderUI(); 
+
+            renderUI();
             btn.disabled = false;
             btn.classList.remove('opacity-80');
-            
+
             // Remove spin after tiny delay for smoothness
             setTimeout(() => {
                 iconWrap.classList.remove('animate-spin-slow');
             }, 600);
         }
 
-        window.copyRaidCmd = function(event, btn, id) {
+        window.copyRaidCmd = function (event, btn, id) {
             event.preventDefault();
             event.stopPropagation();
-            
+
             const textToCopy = '/raid ' + id;
-            
+
             try {
                 // 最暴力的無腦複製法：使用隱藏輸入框，相容所有主流與老舊瀏覽器
                 const input = document.createElement("input");
                 input.setAttribute("value", textToCopy);
                 document.body.appendChild(input);
-                
+
                 // 完全隱藏
                 input.style.position = "fixed";
                 input.style.top = "-9999px";
                 input.style.left = "-9999px";
-                
+
                 input.select();
                 input.setSelectionRange(0, 99999); // 支援手機版 Safari
-                
+
                 document.execCommand("copy");
                 document.body.removeChild(input);
 
@@ -691,7 +774,7 @@
                     icon.classList.remove('group-hover/copy:scale-110');
                     icon.classList.add('text-green-400', 'scale-125');
                     lucide.createIcons({ root: btn });
-                    
+
                     // 2秒後自動恢復
                     setTimeout(() => {
                         icon.setAttribute('data-lucide', oldIcon);
@@ -708,7 +791,7 @@
 
         // 初始載入
         renderUI(); // 先顯示骨架
-        
+
         // 立即發送 Twitch API 請求更新資料，確保一打開網頁就開始載入圖片與人數
         setTimeout(() => {
             refreshLiveStatus();
