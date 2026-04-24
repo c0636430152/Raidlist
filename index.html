@@ -517,8 +517,8 @@
                                         <a href="https://twitch.tv/${ally.id}" target="_blank" class="text-twitch hover:text-twitch-accent hover:underline text-sm flex items-center truncate tracking-wide focus:outline-none">
                                             @${ally.id}
                                         </a>
-                                        <button onclick="copyRaidCmd(event, this, '${ally.id}')" title="複製揪團指令" class="p-1 rounded bg-[#18181b] hover:bg-gray-700 border border-gray-800 text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-twitch/50 flex-shrink-0 cursor-pointer">
-                                            <i data-lucide="copy" class="w-3 h-3"></i>
+                                        <button onclick="copyRaidCmd(event, this, '${ally.id}')" title="複製揪團指令" class="p-1.5 px-2 rounded-lg bg-[#18181b] hover:bg-gray-700 border border-gray-800 text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-twitch/50 flex-shrink-0 cursor-pointer flex items-center gap-1 shadow-md">
+                                            <i data-lucide="copy" class="w-4 h-4"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -535,15 +535,15 @@
                         </div>
 
                         <!-- 3. 頻道連結 (Desktop) -->
-                        <div class="md:w-2/12 hidden md:flex items-center gap-2 min-w-0 relative z-10">
+                        <div class="md:w-2/12 hidden md:flex items-center gap-2.5 min-w-0 relative z-10">
                             <a href="https://twitch.tv/${ally.id}" target="_blank" class="text-twitch hover:text-twitch-accent transition-colors text-base flex items-center gap-1.5 group/link w-max truncate focus:outline-none">
                                 <div class="p-1.5 rounded-lg bg-twitch/10 group-hover/link:bg-twitch/20 transition-colors">
-                                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                                    <i data-lucide="external-link" class="w-5 h-5"></i>
                                 </div>
                                 <span class="truncate font-medium">@${ally.id}</span>
                             </a>
-                            <button onclick="copyRaidCmd(event, this, '${ally.id}')" title="複製揪團指令 /raid ${ally.id}" class="p-1.5 rounded-lg bg-[#18181b] hover:bg-gray-700 border border-gray-800 text-gray-400 hover:text-white transition-colors focus:outline-none flex-shrink-0 cursor-pointer group/copy relative">
-                                <i data-lucide="copy" class="w-3.5 h-3.5 group-hover/copy:scale-110 transition-transform"></i>
+                            <button onclick="copyRaidCmd(event, this, '${ally.id}')" title="複製揪團指令 /raid ${ally.id}" class="p-2 rounded-lg bg-[#18181b] hover:bg-gray-700 border border-gray-700 text-gray-300 hover:text-white transition-colors focus:outline-none flex-shrink-0 cursor-pointer group/copy relative shadow-[0_0_10px_rgba(0,0,0,0.5)] hover:shadow-twitch/30">
+                                <i data-lucide="copy" class="w-5 h-5 group-hover/copy:scale-110 transition-transform"></i>
                             </button>
                         </div>
 
