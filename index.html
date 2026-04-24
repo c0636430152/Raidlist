@@ -642,10 +642,10 @@
         // 初始載入
         renderUI(); // 先顯示骨架
         
-        // 網頁準備好後，自動發送 Twitch API 請求更新資料
-        window.addEventListener('load', () => {
-            setTimeout(refreshLiveStatus, 100);
-        });
+        // 立即發送 Twitch API 請求更新資料，確保一打開網頁就開始載入圖片與人數
+        setTimeout(() => {
+            refreshLiveStatus();
+        }, 50);
     </script>
 </body>
 
