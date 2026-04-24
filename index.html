@@ -647,58 +647,49 @@
             }, 600);
         }
 
-        window.copyRaidCmd = async function(event, btn, id) {
+        window.copyRaidCmd = function(event, btn, id) {
             event.preventDefault();
             event.stopPropagation();
             
             const textToCopy = '/raid ' + id;
-            let success = false;
             
             try {
-                // 優先使用現代 Clipboard API (需在 https 或 localhost 環境)
-                if (navigator.clipboard && window.isSecureContext) {
-                    await navigator.clipboard.writeText(textToCopy);
-                    success = true;
-                } else {
-                    // 降級方案：支援本地 file:// 協議開啟的狀況
-                    const textArea = document.createElement("textarea");
-                    textArea.value = textToCopy;
-                    // 將輸入框移出畫面
-                    textArea.style.position = "absolute";
-                    textArea.style.left = "-999999px";
-                    document.body.prepend(textArea);
-                    textArea.select();
-                    
-                    try {
-                        success = document.execCommand('copy');
-                    } catch (error) {
-                        console.error('Fallback copy failed', error);
-                    } finally {
-                        textArea.remove();
-                    }
-                }
+                // 最暴力的無腦複製法：使用隱藏輸入框，相容所有主流與老舊瀏覽器
+                const input = document.createElement("input");
+                input.setAttribute("value", textToCopy);
+                document.body.appendChild(input);
+                
+                // 完全隱藏
+                input.style.position = "fixed";
+                input.style.top = "-9999px";
+                input.style.left = "-9999px";
+                
+                input.select();
+                input.setSelectionRange(0, 99999); // 支援手機版 Safari
+                
+                document.execCommand("copy");
+                document.body.removeChild(input);
 
-                if (!success) throw new Error('Copy failed');
-
+                // 成功動畫切換成打勾
                 const icon = btn.querySelector('i');
-                const oldIcon = icon.getAttribute('data-lucide');
-                
-                // 動畫切換成打勾
-                icon.setAttribute('data-lucide', 'check');
-                icon.classList.remove('group-hover/copy:scale-110');
-                icon.classList.add('text-green-400', 'scale-125');
-                lucide.createIcons({ root: btn });
-                
-                // 2秒後自動恢復
-                setTimeout(() => {
-                    icon.setAttribute('data-lucide', oldIcon);
-                    icon.classList.add('group-hover/copy:scale-110');
-                    icon.classList.remove('text-green-400', 'scale-125');
+                if (icon) {
+                    const oldIcon = icon.getAttribute('data-lucide');
+                    icon.setAttribute('data-lucide', 'check');
+                    icon.classList.remove('group-hover/copy:scale-110');
+                    icon.classList.add('text-green-400', 'scale-125');
                     lucide.createIcons({ root: btn });
-                }, 2000);
-            } catch (e) {
-                console.error('複製失敗', e);
-                alert('您的瀏覽器不支援一鍵複製，請手動框選複製！\\n指令：' + textToCopy);
+                    
+                    // 2秒後自動恢復
+                    setTimeout(() => {
+                        icon.setAttribute('data-lucide', oldIcon);
+                        icon.classList.add('group-hover/copy:scale-110');
+                        icon.classList.remove('text-green-400', 'scale-125');
+                        lucide.createIcons({ root: btn });
+                    }, 2000);
+                }
+            } catch (err) {
+                console.error('複製徹底失敗', err);
+                prompt('不好意思，您的瀏覽器安全層級較高阻擋了一鍵複製。\\n請直接手動複製以下指令：', textToCopy);
             }
         };
 
