@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Twitch 盟友清單 (揪團清單)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        twitch: {
+                            DEFAULT: '#9146FF',
+                            hover: '#772CE8',
+                            dark: '#0e0e10',
+                            panel: '#18181b',
+                            card: '#1f1f23',
+                            accent: '#00e5ff'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 1.5s linear infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            overflow-x: hidden;
+            background-color: #0e0e10;
+            color: #efeff1;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        ::selection {
+            background-color: rgba(145, 70, 255, 0.5);
+            color: white;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0e0e10;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3a3a3d;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555558;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-header {
+            background: rgba(14, 14, 16, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-panel {
+            background: rgba(24, 24, 27, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card {
+            background: rgba(31, 31, 35, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(35, 35, 40, 0.8);
+            border-color: rgba(145, 70, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(145, 70, 255, 0.1);
+        }
+
+        /* Live Effects */
+        .live-ring::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid #eb0400;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+
+        /* Entry Animations */
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-item {
+            opacity: 0;
+            animation: slideUpFade 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Glowing Refresh Button */
+        .btn-glow {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(120deg, #9146FF, #ff416c, #00c9ff, #9146FF);
+            background-size: 300%;
+            z-index: -1;
+            transition: opacity 0.3s;
+            animation: animate-gradient 4s linear infinite;
+        }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 20px rgba(145, 70, 255, 0.6);
+            transform: scale(1.02);
+        }
+
+        .btn-glow:active {
+            transform: scale(0.98);
+        }
+
+        @keyframes animate-gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Grade Badges */
+        .badge-base {
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 48px;
+        }
+
+        .badge-t1 { background: linear-gradient(135deg, #FACC15 0%, #F59E0B 100%); color: #451A03; box-shadow: 0 2px 10px rgba(250,204,21,0.2); }
+        .badge-t2p { background: linear-gradient(135deg, #22D3EE 0%, #3B82F6 100%); color: #FFFFFF; box-shadow: 0 2px 10px rgba(34,211,238,0.2); }
+        .badge-t2  { background: linear-gradient(135deg, #A855F7 0%, #D946EF 100%); color: #FFFFFF; box-shadow: 0 2px 10px rgba(168,85,247,0.2); }
+        .badge-t3  { background: linear-gradient(135deg, #4B5563 0%, #6B7280 100%); color: #F3F4F6; }
+        .badge-offline { background: rgba(255, 255, 255, 0.05); color: #9CA3AF; border: 1px solid rgba(255, 255, 255, 0.1); }
+        
+        .watermark {
+            pointer-events: none;
+            user-select: none;
+            z-index: 50;
+            background: rgba(145, 70, 255, 0.08);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(145, 70, 255, 0.15);
+            box-shadow: 0 0 20px rgba(145, 70, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body class="relative w-full max-w-full pb-20">
+    <!-- 浮水印 -->
+    <div class="fixed bottom-6 right-4 md:right-8 watermark px-3 py-2 md:px-4 md:py-2.5 rounded-xl md:rounded-2xl text-twitch font-black shadow-lg text-[9px] md:text-xs origin-bottom-right rotate-[-2deg]">
+        <div class="flex items-center gap-1.5 md:gap-2">
+            <i data-lucide="shield-alert" class="w-3 h-3 md:w-4 md:h-4"></i>
+            <span>內容保密．團隊內部專用</span>
+        </div>
+    </div>
+
+    <div id="app" class="w-full max-w-full">
+        <!-- 標題欄 (Sticky Glass Header) -->
+        <header class="glass-header sticky top-0 z-40 shadow-2xl px-4 sm:px-8">
+            <div class="max-w-6xl mx-auto py-4 flex items-center justify-between gap-3">
+                <div class="min-w-0 flex-1 flex flex-col justify-center">
+                    <div class="flex items-center gap-3">
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 tracking-tighter truncate">
+                            Twitch 盟友清單
+                        </h1>
+                        <span class="hidden sm:flex items-center gap-1 bg-twitch/20 text-twitch-accent border border-twitch/30 px-3 py-1 rounded-full text-sm font-bold shadow-[0_0_15px_rgba(145,70,255,0.2)]">
+                            <i data-lucide="users" class="w-4 h-4"></i> 73位人員
+                        </span>
+                    </div>
+                    <div id="status-bar" class="flex items-center gap-1.5 mt-1 text-xs md:text-sm font-bold uppercase tracking-widest truncate text-gray-500">
+                        <span class="inline-block w-1.5 h-1.5 rounded-full bg-gray-500 animate-pulse"></span> 準備連線中...
+                    </div>
+                </div>
+                <button id="refresh-btn" onclick="refreshLiveStatus()" class="group flex-shrink-0 btn-glow text-white px-5 py-2.5 md:px-6 md:py-3 rounded-xl md:rounded-2xl text-sm md:text-base font-black transition-all flex items-center gap-2">
+                    <span id="refresh-icon-wrapper" class="inline-block transition-transform duration-500">
+                        <i data-lucide="refresh-ccw" class="w-5 h-5 text-white"></i>
+                    </span>
+                    <span class="hidden sm:inline tracking-wider">同步實況狀態</span>
+                    <span class="sm:hidden tracking-wider">同步</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="max-w-6xl mx-auto mt-8 px-4 sm:px-8">
+            <!-- 統計區 & 日期 -->
+            <div class="flex flex-col xl:flex-row justify-between items-start xl:items-end mb-8 gap-6">
+                <div class="space-y-1">
+                    <p class="text-xs font-black text-twitch uppercase tracking-[0.3em] flex items-center gap-2 mb-1">
+                        <i data-lucide="calendar" class="w-3.5 h-3.5"></i> 最後自動同步日期
+                    </p>
+                    <p id="current-date" class="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-twitch-hover to-twitch-accent tracking-tighter shadow-sm"></p>
+                </div>
+                <div class="w-full xl:w-auto">
+                    <!-- 動態生成的統計卡片 -->
+                    <div id="count-summary" class="w-full"></div>
+                </div>
+            </div>
+
+            <!-- 智慧排序規則提示 -->
+            <div class="relative overflow-hidden bg-gradient-to-br from-[#18181b] to-black border border-white/5 rounded-3xl p-6 md:p-8 text-white shadow-2xl mb-8 group">
+                <div class="absolute -top-32 -right-32 w-[300px] h-[300px] bg-twitch/20 blur-[100px] rounded-full group-hover:bg-twitch/30 transition-colors duration-700 pointer-events-none"></div>
+                
+                <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-5 md:gap-6">
+                    <div class="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-[#0e0e10] flex items-center justify-center border border-white/10 shadow-inner group-hover:scale-110 transition-transform duration-500">
+                        <i data-lucide="sparkles" class="w-6 h-6 md:w-8 md:h-8 text-twitch-accent"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xs md:text-sm font-black text-twitch-accent mb-2 tracking-widest uppercase inline-flex items-center gap-1.5 bg-twitch-accent/10 px-3 py-1 rounded-full"><div class="w-1.5 h-1.5 rounded-full bg-twitch-accent animate-pulse"></div> Smart Sort System</h3>
+                        <p class="text-lg md:text-2xl font-bold leading-relaxed text-gray-200">
+                            系統已自動將 <span class="relative inline-block mx-1"><span class="relative z-10 text-white font-black px-1.5">正在開台</span><span class="absolute bottom-1 left-0 w-full h-2.5 bg-twitch/80 -z-10 rounded-sm"></span></span> 的盟友置頂。
+                            <span class="text-base md:text-lg text-gray-400 font-medium block mt-1">請優先揪團給位於區隔線上方的人員，以創造最高的導流效果 🔥</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 電腦版/手機版共用 List 容器 -->
+            <div class="glass-panel rounded-3xl overflow-hidden shadow-2xl mb-12 border border-white/5">
+                <!-- 列表標頭 (僅桌面版顯示) -->
+                <div class="hidden md:flex items-center px-6 py-4 bg-[#0e0e10]/60 text-xs sm:text-sm font-black text-gray-400 uppercase tracking-widest border-b border-gray-800">
+                    <div class="w-3/12 flex items-center gap-2"><i data-lucide="user" class="w-4 h-4"></i> 實況主資訊</div>
+                    <div class="w-2/12 flex items-center gap-2"><i data-lucide="radio" class="w-4 h-4"></i> 頻道狀態</div>
+                    <div class="w-2/12 flex items-center gap-2"><i data-lucide="link" class="w-4 h-4"></i> 頻道連結</div>
+                    <div class="w-4/12 flex items-center gap-2"><i data-lucide="file-text" class="w-4 h-4"></i> 備註簡介</div>
+                    <div class="w-1/12 text-right flex items-center justify-end gap-2"><i data-lucide="tag" class="w-4 h-4"></i> 分級</div>
+                </div>
+                
+                <!-- 列表內容動態渲染區塊 -->
+                <div id="main-list-container" class="p-4 md:p-5 flex flex-col bg-[#141417]">
+                    <!-- JS 生成項目 -->
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // 設定當天日期
+        document.getElementById('current-date').innerText = new Date().toLocaleDateString('zh-TW', {
+            year: 'numeric', month: '2-digit', day: '2-digit'
+        }).replace(/\//g, '.');
+
+        // 初始化 Lucide 圖標
+        lucide.createIcons();
+
+        const API_CONFIG = { clientId: '3llrahqqu4s0gi17eehtoft8g60may', clientSecret: 'dyvy4obvo5p8yu0p01h8cvayjji4yf', accessToken: null };
+
+        const alliesData = [
+            // T1 (17人)
+            { name: "一顆歡茄", id: "meitoo85", intro: "主要玩APEX+LOL+心動小鎮。互動良好、脾氣很好，不漏留言。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "一顆地呱", id: "a12360107", intro: "戶外台。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "巨跟萌妹", id: "xivxy", intro: "瓦羅蘭。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "兔妮毛球", id: "xmaoqiux", intro: "主要燕雲十六聲。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "毛毛躁躁", id: "maomao77777", intro: "LOL(實況邊緣人)。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "粉紅牛逼狗", id: "bandso2000", intro: "LOL(實況邊緣人 )。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "牛奶凌", id: "chiiling04", intro: "瓦羅蘭。與芊妘妘妘關係良好。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "王爆豪", id: "gjesst4628", intro: "楓之谷、戰旗(棄坑)。姜太公軍師。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "摸尼", id: "mori1028", intro: "楓之谷(實況邊緣人)。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "冠希老師", id: "lcl_wiz29", intro: "STEAM雜食，以前主瓦。蛇窩老闆，有人脈。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "1234個蛋", id: "4_egg", intro: "ARAM+APEX+STEAM(實況邊緣人)。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "小俞ツ", id: "xiaoyu24323", intro: "三角洲玩家，兼任陪玩，有人脈。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "窩4橘毛", id: "orangemao", intro: "瓦羅蘭，人脈良好。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "肉先生", id: "ggsod", intro: "雜談高手，好相處。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "詩詩44", id: "shishichuchu", intro: "滑雪教練。具備合作意識與個人主見。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "落花花", id: "a0411utumn", intro: "懂人情世故，擅長交際。瓦羅蘭為主。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "乃萬在台第一迷弟", id: "johnny2562440", intro: "LOL台。毛毛躁躁的資深觀眾。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+
+            // T2★ (45人)
+            { name: "芊妘妘妘", id: "qxccyunn", intro: "數據優秀(經常100+)。與牛奶凌關係密切。", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "蘇喜是壽司", id: "susi1128", intro: "具備合作意識。潛力小主播。", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "厭世三星蔥", id: "kouyifu", intro: "正在轉職繪師。瓦羅蘭台。", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "咪迷宅這麼可愛", id: "memejaiovo", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "苒苒です", id: "ranran1019_", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "杯踢", id: "betty_bouod", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "大阪天狗", id: "j8899", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "貓貓隊長", id: "aumimimi", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "天才少女柳如煙", id: "000lin11", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "良董電腦", id: "liang_dong_3c", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "魚子子", id: "yuzz727", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "小野です_", id: "tin_202", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "大布拉拉", id: "lala_8282", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "牙婷シ", id: "yating1222", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "旻熊", id: "minxiongtw", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "蓋蓋子", id: "xuj1n9e", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "啊呱呱", id: "gua910625", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "卡滋嘎蹦", id: "kazgabong", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "Kerwinnn", id: "kerwinnn_", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "西陵珩", id: "linheng0310", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "琳子", id: "lynnnnn_819", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "楓葉掉了變落葉", id: "maple04033", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "麻吉了", id: "muacheeee", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "可可脆片蜜糖波堤", id: "hanidonatsu", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "時凝凝凝凝", id: "shih_n", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "王鶺鶒", id: "lingling0045", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "酥烤貓", id: "sukaomao", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "南極哥", id: "wsx70529", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "鈴姆", id: "lingmu_ch", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "橘子果園", id: "orz699", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "小花芽", id: "bonnyyy_", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "賣茹小", id: "chiuruby", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "霜淇淋啦", id: "st101715", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "冰島雪花牛", id: "snowcow5200", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "兩萬六", id: "only26k", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "聿凱", id: "yukai0915", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "檸檬羊", id: "lemonyang", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "逃跑吧婷兔", id: "ting5211", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "花花寶貝", id: "hua1031_", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "劉作康", id: "lock1ngtnt", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "其實我叫哈蜜瓜", id: "hamiguaa", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "芊芊芊芊芊", id: "qiannnzl", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "薯泥啾啾", id: "cheesepotato99", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "乃教練", id: "a1000281", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "阿奎", id: "znnnxll_", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+
+            // T3 (11人)
+            { name: "琳琳", id: "cyberlynnpunk", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "年糕喵", id: "aas0220", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "莓莓丶", id: "omimimimi123", intro: "備用：alisa4524", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "嘟桑", id: "amidodo_", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "我是林木木", id: "xmoooomx", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "柚花籽", id: "yuukaha", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "早安傑米", id: "jamie_oovoo", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "起司帕尼尼", id: "sawaa0816", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "傑洛奈", id: "neun09", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "芋_圓", id: "yyyc_o1o1", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "妃寶寶", id: "dada6621", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 }
+        ];
+
+        function renderStatsArea() {
+            const counts = { T1: 0, T2P: 0, T2: 0, T3: 0 };
+            let liveCount = 0;
+            alliesData.forEach(a => {
+                counts[a.type]++;
+                if(a.isLive) liveCount++;
+            });
+
+            const summary = document.getElementById('count-summary');
+            summary.innerHTML = `
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 lg:w-[600px] ml-auto">
+                    <!-- T1 -->
+                    <div class="bg-gradient-to-b from-[#1c1c21] to-[#141417] border border-white/10 rounded-2xl p-4 flex flex-col relative overflow-hidden group hover:border-yellow-400/50 transition-colors">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-yellow-400/5 rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-500"></div>
+                        <div class="flex justify-between items-start mb-1.5">
+                            <p class="text-xs sm:text-sm text-yellow-500 font-black tracking-widest uppercase truncate break-all w-full pr-4">T1優先</p>
+                            <i data-lucide="crown" class="w-4 h-4 text-yellow-500/70 shrink-0"></i>
+                        </div>
+                        <p class="text-3xl sm:text-4xl font-black text-white">${counts.T1}</p>
+                    </div>
+                    <!-- T2P -->
+                    <div class="bg-gradient-to-b from-[#1c1c21] to-[#141417] border border-white/10 rounded-2xl p-4 flex flex-col relative overflow-hidden group hover:border-cyan-400/50 transition-colors">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-cyan-400/5 rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-500"></div>
+                        <div class="flex justify-between items-start mb-1.5">
+                            <p class="text-xs sm:text-sm text-cyan-400 font-black tracking-widest uppercase truncate break-all w-full pr-4">T2★潛力</p>
+                            <i data-lucide="star" class="w-4 h-4 text-cyan-400/70 shrink-0"></i>
+                        </div>
+                        <p class="text-3xl sm:text-4xl font-black text-white">${counts.T2P}</p>
+                    </div>
+                    <!-- T2 -->
+                    <div class="bg-gradient-to-b from-[#1c1c21] to-[#141417] border border-white/10 rounded-2xl p-4 flex flex-col relative overflow-hidden group hover:border-purple-400/50 transition-colors">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-purple-400/5 rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-500"></div>
+                        <div class="flex justify-between items-start mb-1.5">
+                            <p class="text-xs sm:text-sm text-purple-400 font-black tracking-widest uppercase truncate break-all w-full pr-4">T2實力</p>
+                            <i data-lucide="zap" class="w-4 h-4 text-purple-400/70 shrink-0"></i>
+                        </div>
+                        <p class="text-3xl sm:text-4xl font-black text-white">${counts.T2}</p>
+                    </div>
+                    <!-- T3 -->
+                    <div class="bg-gradient-to-b from-[#1c1c21] to-[#141417] border border-white/10 rounded-2xl p-4 flex flex-col relative overflow-hidden group hover:border-gray-400/50 transition-colors">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-gray-400/5 rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-500"></div>
+                        <div class="flex justify-between items-start mb-1.5">
+                            <p class="text-xs sm:text-sm text-gray-400 font-black tracking-widest uppercase truncate break-all w-full pr-4">T3一般</p>
+                            <i data-lucide="users" class="w-4 h-4 text-gray-400/70 shrink-0"></i>
+                        </div>
+                        <p class="text-3xl sm:text-4xl font-black text-white">${counts.T3}</p>
+                    </div>
+                </div>
+            `;
+            // Call Lucide to render these new icons
+            lucide.createIcons();
+        }
+
+        function renderListArea() {
+            const listContainer = document.getElementById('main-list-container');
+            listContainer.innerHTML = '';
+
+            // 排序邏輯：1. Live優先 2. 分級權重 3. 同樣分級才比觀看數
+            const rankOrder = { 'T1': 1, 'T2P': 2, 'T2': 3, 'T3': 4 };
+            alliesData.sort((a, b) => {
+                if (a.isLive !== b.isLive) return a.isLive ? -1 : 1;
+                if (rankOrder[a.type] !== rankOrder[b.type]) return rankOrder[a.type] - rankOrder[b.type];
+                if (a.isLive && b.isLive) return (b.viewerCount || 0) - (a.viewerCount || 0);
+                return 0;
+            });
+
+            let dividerAdded = false;
+
+            alliesData.forEach((ally, index) => {
+                if (!ally.isLive && !dividerAdded && index > 0) {
+                    listContainer.innerHTML += `
+                        <div class="flex items-center gap-4 py-8 px-4 opacity-60">
+                            <div class="h-[1px] bg-gradient-to-r from-transparent via-gray-700 to-transparent flex-1"></div>
+                            <span class="text-sm font-black text-gray-500 uppercase tracking-[0.2em] flex items-center gap-2">
+                                <i data-lucide="moon" class="w-4 h-4"></i> Offline Members
+                            </span>
+                            <div class="h-[1px] bg-gradient-to-r from-transparent via-gray-700 to-transparent flex-1"></div>
+                        </div>`;
+                    dividerAdded = true;
+                }
+
+                const delay = index * 0.03; // Waterfall animation
+                const avatarFallbackUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(ally.name)}&background=18181b&color=9146FF`;
+                const avatarUrl = ally.avatar || avatarFallbackUrl;
+                
+                // Badges
+                const badgeStyleMap = {
+                    'T1': 'badge-t1',
+                    'T2P': 'badge-t2p',
+                    'T2': 'badge-t2',
+                    'T3': 'badge-t3'
+                };
+                const typeLabel = ally.type === 'T2P' ? 'T2★' : ally.type;
+                const finalBadgeStyle = ally.isLive ? badgeStyleMap[ally.type] : 'badge-offline';
+                const badgeHtml = `<span class="badge-base ${finalBadgeStyle}">${typeLabel}</span>`;
+
+                // Live Tags
+                const liveTagDesktop = ally.isLive
+                    ? `<div class="flex items-center gap-2.5 bg-red-500/10 border border-red-500/20 px-3 py-1.5 rounded-full text-red-500 shadow-[0_0_15px_rgba(235,4,0,0.1)] w-max">
+                           <div class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
+                           <span class="text-sm font-bold tracking-wider">${ally.viewerCount.toLocaleString()} <span class="text-[10px] opacity-80 uppercase ml-0.5">Viewers</span></span>
+                       </div>`
+                    : `<div class="flex items-center gap-2 text-gray-600 px-3 py-1.5 w-max">
+                           <div class="w-2.5 h-2.5 rounded-full border border-gray-600"></div>
+                           <span class="text-[11px] font-bold uppercase tracking-widest">Offline</span>
+                       </div>`;
+                       
+                const liveTagMobile = ally.isLive
+                    ? `<div class="flex items-center gap-1.5 text-red-500">
+                           <div class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></div>
+                           <span class="text-sm font-black tracking-wide">${ally.viewerCount.toLocaleString()} Viewers</span>
+                       </div>`
+                    : `<div class="flex items-center gap-1.5 text-gray-600 text-sm font-bold"><i data-lucide="moon" class="w-3.5 h-3.5"></i> 離線中</div>`;
+
+                // Intro processing
+                const hasIntro = ally.intro && ally.intro !== '-';
+                const introHtml = hasIntro 
+                    ? `<span class="text-gray-400 text-sm">「 ${ally.intro} 」</span>` 
+                    : `<span class="opacity-30 italic text-sm">無相關備註</span>`;
+
+                // Render Card Row
+                listContainer.innerHTML += `
+                    <div class="relative overflow-hidden group glass-card rounded-2xl p-4 md:px-5 md:py-3.5 mb-3 animate-item flex flex-col md:flex-row md:items-center gap-4 transition-all" style="animation-delay: ${delay}s">
+                        
+                        <!-- Hover Glow Effect (Desktop mostly visible) -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-twitch/0 via-twitch/5 to-twitch/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none -translate-x-full group-hover:translate-x-full duration-1000 ease-in-out"></div>
+
+                        <!-- 1. 實況主資訊 (包含 Mobile Live Badge) -->
+                        <div class="flex items-center justify-between md:justify-start md:w-3/12 gap-3 relative z-10 w-full">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="relative flex-shrink-0">
+                                    <img src="${avatarUrl}" class="w-14 h-14 md:w-12 md:h-12 rounded-full object-cover shadow-[0_0_15px_rgba(0,0,0,0.5)] ${ally.isLive ? 'ring-2 ring-red-500 ring-offset-2 ring-offset-[#141417] shadow-[0_0_15px_rgba(235,4,0,0.4)]' : 'opacity-70 grayscale-[20%] border border-white/10'} transition-all group-hover:grayscale-0 group-hover:opacity-100">
+                                </div>
+                                <div class="flex flex-col min-w-0">
+                                    <span class="font-bold text-gray-100 text-lg md:text-[17px] tracking-wide truncate ${ally.isLive ? '' : 'text-gray-400'}">${ally.name}</span>
+                                    <a href="https://twitch.tv/${ally.id}" target="_blank" class="text-twitch hover:text-twitch-accent hover:underline text-sm flex items-center md:hidden mt-0.5 truncate tracking-wide">
+                                        @${ally.id}
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Mobile Badge -->
+                            <div class="md:hidden flex-shrink-0 ml-2">
+                                ${badgeHtml}
+                            </div>
+                        </div>
+
+                        <!-- 2. 直播狀態 (Desktop) -->
+                        <div class="md:w-2/12 hidden md:flex items-center relative z-10">
+                            ${liveTagDesktop}
+                        </div>
+
+                        <!-- 3. 頻道連結 (Desktop) -->
+                        <div class="md:w-2/12 hidden md:block min-w-0 relative z-10">
+                            <a href="https://twitch.tv/${ally.id}" target="_blank" class="text-twitch hover:text-twitch-accent transition-colors text-base flex items-center gap-1.5 group/link w-max truncate">
+                                <div class="p-1.5 rounded-lg bg-twitch/10 group-hover/link:bg-twitch/20 transition-colors">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </div>
+                                <span class="truncate font-medium">@${ally.id}</span>
+                            </a>
+                        </div>
+
+                        <!-- 4. 備註簡介 (Desktop & Mobile Box) -->
+                        <div class="bg-[#0e0e10]/60 rounded-xl p-3 md:p-0 md:bg-transparent md:w-4/12 text-sm text-gray-400 flex-1 border border-white/5 md:border-none relative z-10 min-w-0">
+                            <div class="truncate w-full pr-2 leading-relaxed">
+                                ${introHtml}
+                            </div>
+                            
+                            <!-- Mobile Live Viewers & Action Row inside intro box -->
+                            <div class="mt-3 flex items-center justify-between md:hidden border-t border-gray-800 pt-3">
+                                ${liveTagMobile}
+                                <a href="https://twitch.tv/${ally.id}" target="_blank" class="text-xs text-white bg-twitch/90 hover:bg-twitch px-3.5 py-2 rounded-lg font-bold flex items-center gap-1.5 active:scale-95 transition-transform shadow-[0_0_15px_rgba(145,70,255,0.3)]">
+                                    前往實況 <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 5. 分級 (Desktop) -->
+                        <div class="md:w-1/12 hidden md:flex justify-end relative z-10">
+                            ${badgeHtml}
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Re-initialize icons inside new DOM
+            lucide.createIcons();
+        }
+
+        function renderUI() {
+            renderStatsArea();
+            renderListArea();
+        }
+
+        async function getAccessToken() {
+            try {
+                const res = await fetch(`https://id.twitch.tv/oauth2/token?client_id=${API_CONFIG.clientId}&client_secret=${API_CONFIG.clientSecret}&grant_type=client_credentials`, { method: 'POST' });
+                const d = await res.json(); return d.access_token;
+            } catch (e) { return null; }
+        }
+
+        async function refreshLiveStatus() {
+            const btn = document.getElementById('refresh-btn');
+            const iconWrap = document.getElementById('refresh-icon-wrapper');
+            const bar = document.getElementById('status-bar');
+            
+            btn.disabled = true;
+            btn.classList.add('opacity-80');
+            iconWrap.classList.add('animate-spin-slow');
+            bar.innerHTML = '<span class="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> <span class="text-blue-400">正在同步 Twitch 伺服器...</span>';
+
+            if (!API_CONFIG.accessToken) API_CONFIG.accessToken = await getAccessToken();
+            
+            if (API_CONFIG.accessToken) {
+                try {
+                    const ids = alliesData.map(a => a.id);
+                    const userMap = {};
+                    const liveInfoMap = {};
+                    const chunkSize = 100;
+
+                    for (let i = 0; i < ids.length; i += chunkSize) {
+                        const chunk = ids.slice(i, i + chunkSize);
+                        const [uRes, sRes] = await Promise.all([
+                            fetch(`https://api.twitch.tv/helix/users?login=${chunk.join('&login=')}`, { headers: { 'Client-ID': API_CONFIG.clientId, 'Authorization': `Bearer ${API_CONFIG.accessToken}` } }),
+                            fetch(`https://api.twitch.tv/helix/streams?user_login=${chunk.join('&user_login=')}`, { headers: { 'Client-ID': API_CONFIG.clientId, 'Authorization': `Bearer ${API_CONFIG.accessToken}` } })
+                        ]);
+                        const uD = await uRes.json(); const sD = await sRes.json();
+                        if (uD.data) uD.data.forEach(u => userMap[u.login.toLowerCase()] = u.profile_image_url);
+                        if (sD.data) sD.data.forEach(s => {
+                            liveInfoMap[s.user_login.toLowerCase()] = {
+                                viewerCount: s.viewer_count
+                            };
+                        });
+                    }
+
+                    alliesData.forEach(a => {
+                        const lowId = a.id.toLowerCase();
+                        const liveInfo = liveInfoMap[lowId];
+                        a.isLive = !!liveInfo;
+                        a.viewerCount = liveInfo ? liveInfo.viewerCount : 0;
+                        if (userMap[lowId]) a.avatar = userMap[lowId];
+                    });
+                    bar.innerHTML = '<span class="inline-block w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]"></span> <span class="text-green-400 tracking-wider">● 同步成功</span>';
+                } catch (e) { 
+                    bar.innerHTML = '<span class="text-red-500 tracking-wider flex items-center gap-1"><i data-lucide="alert-triangle" class="w-3 h-3"></i> 連線發生錯誤</span>';
+                    lucide.createIcons();
+                }
+            } else {
+                bar.innerHTML = '<span class="text-red-500 tracking-wider flex items-center gap-1"><i data-lucide="alert-triangle" class="w-3 h-3"></i> 無法取得授權</span>';
+                lucide.createIcons();
+            }
+            
+            renderUI(); 
+            btn.disabled = false;
+            btn.classList.remove('opacity-80');
+            
+            // Remove spin after tiny delay for smoothness
+            setTimeout(() => {
+                iconWrap.classList.remove('animate-spin-slow');
+            }, 600);
+        }
+
+        // 初始載入
+        renderUI(); // 先顯示骨架(不卡畫布)
+    </script>
+</body>
+
+</html>
