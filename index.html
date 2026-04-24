@@ -513,9 +513,14 @@
                                 </div>
                                 <div class="flex flex-col min-w-0">
                                     <span class="font-bold text-gray-100 text-lg md:text-[17px] tracking-wide truncate ${ally.isLive ? '' : 'text-gray-400'}">${ally.name}</span>
-                                    <a href="https://twitch.tv/${ally.id}" target="_blank" class="text-twitch hover:text-twitch-accent hover:underline text-sm flex items-center md:hidden mt-0.5 truncate tracking-wide">
-                                        @${ally.id}
-                                    </a>
+                                    <div class="flex items-center gap-2 mt-0.5 md:hidden">
+                                        <a href="https://twitch.tv/${ally.id}" target="_blank" class="text-twitch hover:text-twitch-accent hover:underline text-sm flex items-center truncate tracking-wide focus:outline-none">
+                                            @${ally.id}
+                                        </a>
+                                        <button onclick="copyRaidCmd(event, this, '${ally.id}')" title="複製揪團指令" class="p-1 rounded bg-[#18181b] hover:bg-gray-700 border border-gray-800 text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-twitch/50 flex-shrink-0 cursor-pointer">
+                                            <i data-lucide="copy" class="w-3 h-3"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Mobile Badge -->
@@ -530,13 +535,16 @@
                         </div>
 
                         <!-- 3. 頻道連結 (Desktop) -->
-                        <div class="md:w-2/12 hidden md:block min-w-0 relative z-10">
-                            <a href="https://twitch.tv/${ally.id}" target="_blank" class="text-twitch hover:text-twitch-accent transition-colors text-base flex items-center gap-1.5 group/link w-max truncate">
+                        <div class="md:w-2/12 hidden md:flex items-center gap-2 min-w-0 relative z-10">
+                            <a href="https://twitch.tv/${ally.id}" target="_blank" class="text-twitch hover:text-twitch-accent transition-colors text-base flex items-center gap-1.5 group/link w-max truncate focus:outline-none">
                                 <div class="p-1.5 rounded-lg bg-twitch/10 group-hover/link:bg-twitch/20 transition-colors">
                                     <i data-lucide="external-link" class="w-4 h-4"></i>
                                 </div>
                                 <span class="truncate font-medium">@${ally.id}</span>
                             </a>
+                            <button onclick="copyRaidCmd(event, this, '${ally.id}')" title="複製揪團指令 /raid ${ally.id}" class="p-1.5 rounded-lg bg-[#18181b] hover:bg-gray-700 border border-gray-800 text-gray-400 hover:text-white transition-colors focus:outline-none flex-shrink-0 cursor-pointer group/copy relative">
+                                <i data-lucide="copy" class="w-3.5 h-3.5 group-hover/copy:scale-110 transition-transform"></i>
+                            </button>
                         </div>
 
                         <!-- 4. 備註簡介 (Desktop & Mobile Box) -->
@@ -638,6 +646,33 @@
                 iconWrap.classList.remove('animate-spin-slow');
             }, 600);
         }
+
+        window.copyRaidCmd = async function(event, btn, id) {
+            event.preventDefault();
+            event.stopPropagation();
+            try {
+                await navigator.clipboard.writeText('/raid ' + id);
+                const icon = btn.querySelector('i');
+                const oldIcon = icon.getAttribute('data-lucide');
+                
+                // 動畫切換成打勾
+                icon.setAttribute('data-lucide', 'check');
+                icon.classList.remove('group-hover/copy:scale-110');
+                icon.classList.add('text-green-400', 'scale-125');
+                lucide.createIcons({ root: btn });
+                
+                // 2秒後自動恢復
+                setTimeout(() => {
+                    icon.setAttribute('data-lucide', oldIcon);
+                    icon.classList.add('group-hover/copy:scale-110');
+                    icon.classList.remove('text-green-400', 'scale-125');
+                    lucide.createIcons({ root: btn });
+                }, 2000);
+            } catch (e) {
+                console.error('複製失敗', e);
+                alert('您的瀏覽器不支援一鍵複製，請手動框選複製！');
+            }
+        };
 
         // 初始載入
         renderUI(); // 先顯示骨架
