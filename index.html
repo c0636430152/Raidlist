@@ -640,7 +640,12 @@
         }
 
         // 初始載入
-        renderUI(); // 先顯示骨架(不卡畫布)
+        renderUI(); // 先顯示骨架
+        
+        // 網頁準備好後，自動發送 Twitch API 請求更新資料
+        window.addEventListener('load', () => {
+            setTimeout(refreshLiveStatus, 100);
+        });
     </script>
 </body>
 
