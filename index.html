@@ -650,8 +650,36 @@
         window.copyRaidCmd = async function(event, btn, id) {
             event.preventDefault();
             event.stopPropagation();
+            
+            const textToCopy = '/raid ' + id;
+            let success = false;
+            
             try {
-                await navigator.clipboard.writeText('/raid ' + id);
+                // 優先使用現代 Clipboard API (需在 https 或 localhost 環境)
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(textToCopy);
+                    success = true;
+                } else {
+                    // 降級方案：支援本地 file:// 協議開啟的狀況
+                    const textArea = document.createElement("textarea");
+                    textArea.value = textToCopy;
+                    // 將輸入框移出畫面
+                    textArea.style.position = "absolute";
+                    textArea.style.left = "-999999px";
+                    document.body.prepend(textArea);
+                    textArea.select();
+                    
+                    try {
+                        success = document.execCommand('copy');
+                    } catch (error) {
+                        console.error('Fallback copy failed', error);
+                    } finally {
+                        textArea.remove();
+                    }
+                }
+
+                if (!success) throw new Error('Copy failed');
+
                 const icon = btn.querySelector('i');
                 const oldIcon = icon.getAttribute('data-lucide');
                 
@@ -670,7 +698,7 @@
                 }, 2000);
             } catch (e) {
                 console.error('複製失敗', e);
-                alert('您的瀏覽器不支援一鍵複製，請手動框選複製！');
+                alert('您的瀏覽器不支援一鍵複製，請手動框選複製！\\n指令：' + textToCopy);
             }
         };
 
