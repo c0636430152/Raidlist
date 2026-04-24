@@ -260,7 +260,7 @@
                         <h3 class="text-xs md:text-sm font-black text-twitch-accent mb-2 tracking-widest uppercase inline-flex items-center gap-1.5 bg-twitch-accent/10 px-3 py-1 rounded-full"><div class="w-1.5 h-1.5 rounded-full bg-twitch-accent animate-pulse"></div> Smart Sort System</h3>
                         <p class="text-lg md:text-2xl font-bold leading-relaxed text-gray-200">
                             系統已自動將 <span class="relative inline-block mx-1"><span class="relative z-10 text-white font-black px-1.5">正在開台</span><span class="absolute bottom-1 left-0 w-full h-2.5 bg-twitch/80 -z-10 rounded-sm"></span></span> 的盟友置頂。
-                            <span class="text-base md:text-lg text-gray-400 font-medium block mt-1">請優先揪團給位於區隔線上方的人員，以創造最高的導流效果 🔥</span>
+                            <span class="text-base md:text-lg text-gray-400 font-medium block mt-1">請優先揪團給位於正在開台的夥伴，若都沒人可以自己決定 🔥</span>
                         </p>
                     </div>
                 </div>
@@ -287,10 +287,19 @@
     </div>
 
     <script>
-        // 設定當天日期
-        document.getElementById('current-date').innerText = new Date().toLocaleDateString('zh-TW', {
-            year: 'numeric', month: '2-digit', day: '2-digit'
-        }).replace(/\//g, '.');
+        // 設定當天日期與即時時鐘
+        function updateTime() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('zh-TW', {
+                year: 'numeric', month: '2-digit', day: '2-digit'
+            }).replace(/\//g, '.');
+            const timeStr = now.toLocaleTimeString('zh-TW', {
+                hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'
+            });
+            document.getElementById('current-date').innerText = dateStr + ' ' + timeStr;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
 
         // 初始化 Lucide 圖標
         lucide.createIcons();
@@ -393,37 +402,41 @@
                     <div class="bg-gradient-to-b from-[#1c1c21] to-[#141417] border border-white/10 rounded-2xl p-4 flex flex-col relative overflow-hidden group hover:border-yellow-400/50 transition-colors">
                         <div class="absolute top-0 right-0 w-16 h-16 bg-yellow-400/5 rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-500"></div>
                         <div class="flex justify-between items-start mb-1.5">
-                            <p class="text-xs sm:text-sm text-yellow-500 font-black tracking-widest uppercase truncate break-all w-full pr-4">T1優先</p>
+                            <p class="text-xs sm:text-sm text-yellow-500 font-black tracking-widest uppercase truncate break-all w-full pr-4">T1</p>
                             <i data-lucide="crown" class="w-4 h-4 text-yellow-500/70 shrink-0"></i>
                         </div>
                         <p class="text-3xl sm:text-4xl font-black text-white">${counts.T1}</p>
+                        <p class="text-[10px] sm:text-xs text-yellow-500/60 mt-1.5 leading-snug line-clamp-2">優先揪團過去給他們</p>
                     </div>
                     <!-- T2P -->
                     <div class="bg-gradient-to-b from-[#1c1c21] to-[#141417] border border-white/10 rounded-2xl p-4 flex flex-col relative overflow-hidden group hover:border-cyan-400/50 transition-colors">
                         <div class="absolute top-0 right-0 w-16 h-16 bg-cyan-400/5 rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-500"></div>
                         <div class="flex justify-between items-start mb-1.5">
-                            <p class="text-xs sm:text-sm text-cyan-400 font-black tracking-widest uppercase truncate break-all w-full pr-4">T2★潛力</p>
+                            <p class="text-xs sm:text-sm text-cyan-400 font-black tracking-widest uppercase truncate break-all w-full pr-4">T2★</p>
                             <i data-lucide="star" class="w-4 h-4 text-cyan-400/70 shrink-0"></i>
                         </div>
                         <p class="text-3xl sm:text-4xl font-black text-white">${counts.T2P}</p>
+                        <p class="text-[10px] sm:text-xs text-cyan-400/60 mt-1.5 leading-snug line-clamp-2">常看台 / 互動良好朋友 / 姜太公乾爹身分 / 具發展潛力新主播</p>
                     </div>
                     <!-- T2 -->
                     <div class="bg-gradient-to-b from-[#1c1c21] to-[#141417] border border-white/10 rounded-2xl p-4 flex flex-col relative overflow-hidden group hover:border-purple-400/50 transition-colors">
                         <div class="absolute top-0 right-0 w-16 h-16 bg-purple-400/5 rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-500"></div>
                         <div class="flex justify-between items-start mb-1.5">
-                            <p class="text-xs sm:text-sm text-purple-400 font-black tracking-widest uppercase truncate break-all w-full pr-4">T2實力</p>
+                            <p class="text-xs sm:text-sm text-purple-400 font-black tracking-widest uppercase truncate break-all w-full pr-4">T2</p>
                             <i data-lucide="zap" class="w-4 h-4 text-purple-400/70 shrink-0"></i>
                         </div>
                         <p class="text-3xl sm:text-4xl font-black text-white">${counts.T2}</p>
+                        <p class="text-[10px] sm:text-xs text-purple-400/60 mt-1.5 leading-snug line-clamp-2">首要一般夥伴</p>
                     </div>
                     <!-- T3 -->
                     <div class="bg-gradient-to-b from-[#1c1c21] to-[#141417] border border-white/10 rounded-2xl p-4 flex flex-col relative overflow-hidden group hover:border-gray-400/50 transition-colors">
                         <div class="absolute top-0 right-0 w-16 h-16 bg-gray-400/5 rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-500"></div>
                         <div class="flex justify-between items-start mb-1.5">
-                            <p class="text-xs sm:text-sm text-gray-400 font-black tracking-widest uppercase truncate break-all w-full pr-4">T3一般</p>
+                            <p class="text-xs sm:text-sm text-gray-400 font-black tracking-widest uppercase truncate break-all w-full pr-4">T3</p>
                             <i data-lucide="users" class="w-4 h-4 text-gray-400/70 shrink-0"></i>
                         </div>
                         <p class="text-3xl sm:text-4xl font-black text-white">${counts.T3}</p>
+                        <p class="text-[10px] sm:text-xs text-gray-400/60 mt-1.5 leading-snug line-clamp-2">一般</p>
                     </div>
                 </div>
             `;
@@ -471,7 +484,7 @@
                     'T3': 'badge-t3'
                 };
                 const typeLabel = ally.type === 'T2P' ? 'T2★' : ally.type;
-                const finalBadgeStyle = ally.isLive ? badgeStyleMap[ally.type] : 'badge-offline';
+                const finalBadgeStyle = badgeStyleMap[ally.type]; // 不管是否離線，皆保持分級原始顏色
                 const badgeHtml = `<span class="badge-base ${finalBadgeStyle}">${typeLabel}</span>`;
 
                 // Live Tags
