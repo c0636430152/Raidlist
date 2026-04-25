@@ -238,6 +238,33 @@
             border: 1px solid rgba(145, 70, 255, 0.15);
             box-shadow: 0 0 20px rgba(145, 70, 255, 0.1);
         }
+        /* Tier Card Styles */
+        .card-tier-t1 {
+            background: rgba(250, 204, 21, 0.05) !important;
+            border-left: 4px solid rgba(250, 204, 21, 0.4) !important;
+        }
+        .card-tier-t1:hover {
+            background: rgba(250, 204, 21, 0.09) !important;
+            border-left: 4px solid rgba(250, 204, 21, 0.8) !important;
+        }
+
+        .card-tier-t2 {
+            background: rgba(34, 211, 238, 0.05) !important;
+            border-left: 4px solid rgba(34, 211, 238, 0.4) !important;
+        }
+        .card-tier-t2:hover {
+            background: rgba(34, 211, 238, 0.09) !important;
+            border-left: 4px solid rgba(34, 211, 238, 0.8) !important;
+        }
+
+        .card-tier-t3 {
+            background: rgba(156, 163, 175, 0.03) !important;
+            border-left: 4px solid rgba(156, 163, 175, 0.2) !important;
+        }
+        .card-tier-t3:hover {
+            background: rgba(156, 163, 175, 0.06) !important;
+            border-left: 4px solid rgba(156, 163, 175, 0.5) !important;
+        }
     </style>
 </head>
 
@@ -279,7 +306,7 @@
                             </h1>
                             <span
                                 class="hidden sm:flex items-center gap-1 bg-twitch/20 text-twitch-accent border border-twitch/30 px-3 py-1 rounded-full text-sm font-bold shadow-[0_0_15px_rgba(145,70,255,0.2)]">
-                                <i data-lucide="users" class="w-4 h-4"></i> 73位人員
+                                <i data-lucide="users" class="w-4 h-4"></i> 76位人員
                             </span>
                         </div>
                         <div id="status-bar"
@@ -360,6 +387,18 @@
                 </div>
             </div>
 
+            <!-- 搜尋欄 -->
+            <div class="mb-8 relative group">
+                <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                    <i data-lucide="search" class="w-5 h-5 text-gray-500 group-focus-within:text-twitch-accent transition-colors"></i>
+                </div>
+                <input type="text" id="search-input" placeholder="搜尋實況主名稱、ID 或備註關鍵字..." 
+                    class="w-full bg-[#18181b]/80 border border-white/5 focus:border-twitch-accent/50 focus:ring-1 focus:ring-twitch-accent/20 rounded-2xl py-4 pl-14 pr-4 text-white placeholder-gray-500 outline-none transition-all backdrop-blur-xl shadow-2xl"
+                    oninput="handleSearch()">
+                <div id="search-count" class="absolute inset-y-0 right-0 pr-5 flex items-center text-xs font-bold text-twitch-accent pointer-events-none tracking-widest">
+                </div>
+            </div>
+
             <!-- 電腦版/手機版共用 List 容器 -->
             <div class="glass-panel rounded-3xl overflow-hidden shadow-2xl mb-12 border border-white/5">
                 <!-- 列表標頭 (僅桌面版顯示) -->
@@ -404,7 +443,7 @@
         const API_CONFIG = { clientId: '3llrahqqu4s0gi17eehtoft8g60may', clientSecret: 'dyvy4obvo5p8yu0p01h8cvayjji4yf', accessToken: null };
 
         const alliesData = [
-            // T1 (17人)
+            // T1 (38人)
             { name: "一顆歡茄", id: "meitoo85", intro: "主要玩APEX+LOL+心動小鎮。互動良好、脾氣很好，不漏留言。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "一顆地呱", id: "a12360107", intro: "戶外台。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "巨跟萌妹", id: "xivxy", intro: "瓦羅蘭。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
@@ -435,12 +474,18 @@
             { name: "逃跑吧婷兔", id: "ting5211", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "花花寶貝", id: "hua1031_", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "薯泥啾啾", id: "cheesepotato99", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "蘇喜是壽司", id: "susi1128", intro: "具備合作意識。潛力小主播。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "咪迷宅這麼可愛", id: "memejaiovo", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "大阪天狗", id: "j8899", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "時凝凝凝凝", id: "shih_n", intro: "戶外台。如果關西搞好又多一個盟友。主要是策略。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "王鶺鶒", id: "lingling0045", intro: "主要是策略。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "南極哥", id: "wsx70529", intro: "主要是策略。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "其實我叫哈蜜瓜", id: "hamiguaa", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "妃寶寶", id: "dada6621", intro: "也是戶外台 有幫助", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
 
-            // T2
-            { name: "蘇喜是壽司", id: "susi1128", intro: "具備合作意識。潛力小主播。", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "咪迷宅這麼可愛", id: "memejaiovo", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            // T2 (28人)
+            { name: "乃教練", id: "a1000281", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "苒苒です", id: "ranran1019", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "大阪天狗", id: "j8899", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "貓貓隊長", id: "aumimimi", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "良董電腦", id: "liang_dong_3c", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "魚子子", id: "yuzz727", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
@@ -455,9 +500,6 @@
             { name: "楓葉掉了變落葉", id: "maple04033", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "麻吉了", id: "muacheeee", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "可可脆片蜜糖波堤", id: "hanidonatsu", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "時凝凝凝凝", id: "shih_n", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "王鶺鶒", id: "lingling0045", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "南極哥", id: "wsx70529", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "鈴姆", id: "lingmu_ch", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "橘子果園", id: "orz699", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "賣茹小", id: "chiuruby", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
@@ -465,17 +507,15 @@
             { name: "兩萬六", id: "only26k", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "檸檬羊", id: "lemonyang", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "劉作康", id: "lock1ngtnt", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "其實我叫哈蜜瓜", id: "hamiguaa", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "芊芊芊芊芊", id: "qiannnzl", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "阿奎", id: "znnnxll_", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "傑洛奈", id: "neun09", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "芋_圓", id: "yyyc_o1o1", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "妃寶寶", id: "dada6621", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "狗活", id: "wsnewoff5", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "辛沃", id: "yinwei_exe", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
 
-            // T3
-            { name: "琳琳", id: "cyberlynnpunk", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            // T3 (10人)
+            { name: "琳琳_", id: "tychelin", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "芊芊芊芊芊", id: "qiannnzl", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "年糕喵", id: "aas0220", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "莓莓丶", id: "omimimimi123", intro: "備用：alisa4524", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "嘟桑", id: "amidodo_", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
@@ -483,9 +523,14 @@
             { name: "柚花籽", id: "yuukaha", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "早安傑米", id: "jamie_oovoo", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "起司帕尼尼", id: "sawaa0816", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "乃教練", id: "a1000281", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "hahahe0304", id: "hahahe0304", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 }
         ];
+
+        let searchQuery = "";
+        function handleSearch() {
+            searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+            renderListArea();
+        }
 
         function renderStatsArea() {
             const counts = { T1: 0, T2: 0, T3: 0 };
@@ -539,9 +584,22 @@
             const listContainer = document.getElementById('main-list-container');
             listContainer.innerHTML = '';
 
+            // 搜尋過濾
+            const filteredData = alliesData.filter(a => 
+                a.name.toLowerCase().includes(searchQuery) || 
+                a.id.toLowerCase().includes(searchQuery) ||
+                (a.intro && a.intro.toLowerCase().includes(searchQuery))
+            );
+
+            // 更新搜尋計數顯示
+            const searchCountEl = document.getElementById('search-count');
+            if (searchCountEl) {
+                searchCountEl.textContent = searchQuery ? `找到 ${filteredData.length} 位人員` : "";
+            }
+
             // 排序邏輯：1. Live優先 2. 分級權重 3. 同樣分級才比觀看數
             const rankOrder = { 'T1': 1, 'T2': 2, 'T3': 3 };
-            alliesData.sort((a, b) => {
+            filteredData.sort((a, b) => {
                 if (a.isLive !== b.isLive) return a.isLive ? -1 : 1;
                 if (rankOrder[a.type] !== rankOrder[b.type]) return rankOrder[a.type] - rankOrder[b.type];
                 if (a.isLive && b.isLive) return (b.viewerCount || 0) - (a.viewerCount || 0);
@@ -550,7 +608,7 @@
 
             let dividerAdded = false;
 
-            alliesData.forEach((ally, index) => {
+            filteredData.forEach((ally, index) => {
                 if (!ally.isLive && !dividerAdded && index > 0) {
                     listContainer.innerHTML += `
                         <div class="flex items-center gap-4 py-8 px-4 opacity-60">
@@ -612,8 +670,9 @@
                     : `<span class="opacity-30 italic text-sm">無相關備註</span>`;
 
                 // Render Card Row
+                const tierClass = `card-tier-${ally.type.toLowerCase()}`;
                 listContainer.innerHTML += `
-                    <div class="relative overflow-hidden group glass-card rounded-2xl p-4 md:px-5 md:py-3.5 mb-3 animate-item flex flex-col md:flex-row md:items-center gap-4 transition-all" style="animation-delay: ${delay}s">
+                    <div class="relative overflow-hidden group glass-card ${tierClass} rounded-2xl p-4 md:px-5 md:py-3.5 mb-3 animate-item flex flex-col md:flex-row md:items-center gap-4 transition-all" style="animation-delay: ${delay}s">
                         
                         <!-- Hover Glow Effect (Desktop mostly visible) -->
                         <div class="absolute inset-0 bg-gradient-to-r from-twitch/0 via-twitch/5 to-twitch/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none -translate-x-full group-hover:translate-x-full duration-1000 ease-in-out"></div>
