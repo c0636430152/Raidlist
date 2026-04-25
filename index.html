@@ -212,16 +212,10 @@
             box-shadow: 0 2px 10px rgba(250, 204, 21, 0.2);
         }
 
-        .badge-t2p {
+        .badge-t2 {
             background: linear-gradient(135deg, #22D3EE 0%, #3B82F6 100%);
             color: #FFFFFF;
             box-shadow: 0 2px 10px rgba(34, 211, 238, 0.2);
-        }
-
-        .badge-t2 {
-            background: linear-gradient(135deg, #A855F7 0%, #D946EF 100%);
-            color: #FFFFFF;
-            box-shadow: 0 2px 10px rgba(168, 85, 247, 0.2);
         }
 
         .badge-t3 {
@@ -330,17 +324,18 @@
                     <div>
                         <h3
                             class="text-xs md:text-sm font-black text-twitch-accent mb-2 tracking-widest uppercase inline-flex items-center gap-1.5 bg-twitch-accent/10 px-3 py-1 rounded-full">
-                            <div class="w-1.5 h-1.5 rounded-full bg-twitch-accent animate-pulse"></div> Smart Sort
-                            System
+                            <div class="w-1.5 h-1.5 rounded-full bg-twitch-accent animate-pulse"></div> Raid System
                         </h3>
                         <p class="text-lg md:text-2xl font-bold leading-relaxed text-gray-200">
                             系統已自動將 <span class="relative inline-block mx-1"><span
                                     class="relative z-10 text-white font-black px-1.5">正在開台</span><span
                                     class="absolute bottom-1 left-0 w-full h-2.5 bg-twitch/80 -z-10 rounded-sm"></span></span>
                             的盟友置頂。
-                            <span
-                                class="text-base md:text-lg text-gray-400 font-medium block mt-1">請優先揪團給位於正在開台的夥伴，若都沒人可以自己決定
-                                🔥</span>
+                            <span class="text-base md:text-lg text-gray-400 font-medium block mt-1">請優先揪團給位於正在開台的夥伴，若都沒人可以自己決定 🔥 按照分級T1、T2、T3，找在線50人以下的優先揪</span>
+                            <span class="text-[10px] md:text-xs text-gray-500 font-medium mt-2.5 flex items-center gap-1.5 opacity-70">
+                                <i data-lucide="info" class="w-3 h-3"></i>
+                                <span>註：括號內的數字 <span class="text-twitch-accent font-bold px-1 bg-twitch-accent/5 rounded border border-twitch-accent/10 whitespace-nowrap">(+)</span> 代表「本月新增追隨人數」。</span>
+                            </span>
                         </p>
                     </div>
                 </div>
@@ -408,55 +403,59 @@
             { name: "詩詩44", id: "shishichuchu", intro: "滑雪教練。具備合作意識與個人主見。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "落花花", id: "a0411utumn", intro: "懂人情世故，擅長交際。瓦羅蘭為主。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "乃萬在台第一迷弟", id: "johnny2562440", intro: "LOL台。毛毛躁躁的資深觀眾。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "厭世三星蔥", id: "kouyifu", intro: "正在轉職繪師。瓦羅蘭台。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "瑟芹寶抓兔兔", id: "catchbunny", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "杯踢", id: "betty_bouod", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "天才少女柳如煙", id: "000lin11", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "小野です_", id: "tin_202", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "牙婷シ", id: "yating1222", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "酥烤貓", id: "sukaomao", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "小花芽", id: "bonnyyy_", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "冰島雪花牛", id: "snowcow5200", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "聿凱", id: "yukai0915", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "逃跑吧婷兔", id: "ting5211", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "花花寶貝", id: "hua1031_", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "薯泥啾啾", id: "cheesepotato99", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
 
-            // T2★ (45人)
-            { name: "芊妘妘妘", id: "qxccyunn", intro: "數據優秀(經常100+)。與牛奶凌關係密切。", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "蘇喜是壽司", id: "susi1128", intro: "具備合作意識。潛力小主播。", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "厭世三星蔥", id: "kouyifu", intro: "正在轉職繪師。瓦羅蘭台。", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "咪迷宅這麼可愛", id: "memejaiovo", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "苒苒です", id: "ranran1019", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "杯踢", id: "betty_bouod", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "大阪天狗", id: "j8899", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "貓貓隊長", id: "aumimimi", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "天才少女柳如煙", id: "000lin11", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "良董電腦", id: "liang_dong_3c", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "魚子子", id: "yuzz727", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "小野です_", id: "tin_202", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "大布拉拉", id: "lala_8282", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "牙婷シ", id: "yating1222", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "旻熊", id: "minxiongtw", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "蓋蓋子", id: "xuj1n9e", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "啊呱呱", id: "gua910625", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "卡滋嘎蹦", id: "kazgabong", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "Kerwinnn", id: "kerwinnn_", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "西陵珩", id: "linheng0310", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "琳子", id: "lynnnnn_819", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "楓葉掉了變落葉", id: "maple04033", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "麻吉了", id: "muacheeee", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "可可脆片蜜糖波堤", id: "hanidonatsu", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "時凝凝凝凝", id: "shih_n", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "王鶺鶒", id: "lingling0045", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "酥烤貓", id: "sukaomao", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "南極哥", id: "wsx70529", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "鈴姆", id: "lingmu_ch", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "橘子果園", id: "orz699", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "小花芽", id: "bonnyyy_", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "賣茹小", id: "chiuruby", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "霜淇淋啦", id: "st101715", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "冰島雪花牛", id: "snowcow5200", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "兩萬六", id: "only26k", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "聿凱", id: "yukai0915", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "檸檬羊", id: "lemonyang", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "逃跑吧婷兔", id: "ting5211", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "花花寶貝", id: "hua1031_", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "劉作康", id: "lock1ngtnt", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "其實我叫哈蜜瓜", id: "hamiguaa", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "芊芊芊芊芊", id: "qiannnzl", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "薯泥啾啾", id: "cheesepotato99", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "乃教練", id: "a1000281", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "阿奎", id: "znnnxll_", intro: "-", type: "T2P", isLive: false, avatar: "", viewerCount: 0 },
+            // T2
+            { name: "蘇喜是壽司", id: "susi1128", intro: "具備合作意識。潛力小主播。", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "咪迷宅這麼可愛", id: "memejaiovo", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "苒苒です", id: "ranran1019", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "大阪天狗", id: "j8899", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "貓貓隊長", id: "aumimimi", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "良董電腦", id: "liang_dong_3c", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "魚子子", id: "yuzz727", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "大布拉拉", id: "lala_8282", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "旻熊", id: "minxiongtw", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "蓋蓋子", id: "xuj1n9e", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "啊呱呱", id: "gua910625", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "卡滋嘎蹦", id: "kazgabong", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "Kerwinnn", id: "kerwinnn_", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "西陵珩", id: "linheng0310", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "琳子", id: "lynnnnn_819", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "楓葉掉了變落葉", id: "maple04033", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "麻吉了", id: "muacheeee", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "可可脆片蜜糖波堤", id: "hanidonatsu", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "時凝凝凝凝", id: "shih_n", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "王鶺鶒", id: "lingling0045", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "南極哥", id: "wsx70529", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "鈴姆", id: "lingmu_ch", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "橘子果園", id: "orz699", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "賣茹小", id: "chiuruby", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "霜淇淋啦", id: "st101715", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "兩萬六", id: "only26k", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "檸檬羊", id: "lemonyang", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "劉作康", id: "lock1ngtnt", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "其實我叫哈蜜瓜", id: "hamiguaa", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "芊芊芊芊芊", id: "qiannnzl", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "阿奎", id: "znnnxll_", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "傑洛奈", id: "neun09", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "芋_圓", id: "yyyc_o1o1", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "妃寶寶", id: "dada6621", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "狗活", id: "wsnewoff5", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "辛沃", id: "yinwei_exe", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
 
-            // T3 (11人)
+            // T3
             { name: "琳琳", id: "cyberlynnpunk", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "年糕喵", id: "aas0220", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "莓莓丶", id: "omimimimi123", intro: "備用：alisa4524", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
@@ -465,13 +464,12 @@
             { name: "柚花籽", id: "yuukaha", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "早安傑米", id: "jamie_oovoo", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "起司帕尼尼", id: "sawaa0816", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "傑洛奈", id: "neun09", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "芋_圓", id: "yyyc_o1o1", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "妃寶寶", id: "dada6621", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 }
+            { name: "乃教練", id: "a1000281", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "hahahe0304", id: "hahahe0304", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 }
         ];
 
         function renderStatsArea() {
-            const counts = { T1: 0, T2P: 0, T2: 0, T3: 0 };
+            const counts = { T1: 0, T2: 0, T3: 0 };
             let liveCount = 0;
             alliesData.forEach(a => {
                 counts[a.type]++;
@@ -480,7 +478,7 @@
 
             const summary = document.getElementById('count-summary');
             summary.innerHTML = `
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 lg:w-[600px] ml-auto">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 lg:w-[480px] ml-auto">
                     <!-- T1 -->
                     <div class="bg-gradient-to-b from-[#1c1c21] to-[#141417] border border-white/10 rounded-2xl p-4 flex flex-col relative overflow-hidden group hover:border-yellow-400/50 transition-colors">
                         <div class="absolute top-0 right-0 w-16 h-16 bg-yellow-400/5 rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-500"></div>
@@ -491,25 +489,15 @@
                         <p class="text-3xl sm:text-4xl font-black text-white">${counts.T1}</p>
                         <p class="text-[10px] sm:text-xs text-yellow-500/60 mt-1.5 leading-snug line-clamp-2">優先揪團過去給他們</p>
                     </div>
-                    <!-- T2P -->
+                    <!-- T2 -->
                     <div class="bg-gradient-to-b from-[#1c1c21] to-[#141417] border border-white/10 rounded-2xl p-4 flex flex-col relative overflow-hidden group hover:border-cyan-400/50 transition-colors">
                         <div class="absolute top-0 right-0 w-16 h-16 bg-cyan-400/5 rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-500"></div>
                         <div class="flex justify-between items-start mb-1.5">
-                            <p class="text-xs sm:text-sm text-cyan-400 font-black tracking-widest uppercase truncate break-all w-full pr-4">T2★</p>
+                            <p class="text-xs sm:text-sm text-cyan-400 font-black tracking-widest uppercase truncate break-all w-full pr-4">T2</p>
                             <i data-lucide="star" class="w-4 h-4 text-cyan-400/70 shrink-0"></i>
                         </div>
-                        <p class="text-3xl sm:text-4xl font-black text-white">${counts.T2P}</p>
-                        <p class="text-[10px] sm:text-xs text-cyan-400/60 mt-1.5 leading-snug line-clamp-2">常看台 / 互動良好朋友 / 姜太公乾爹身分 / 具發展潛力新主播</p>
-                    </div>
-                    <!-- T2 -->
-                    <div class="bg-gradient-to-b from-[#1c1c21] to-[#141417] border border-white/10 rounded-2xl p-4 flex flex-col relative overflow-hidden group hover:border-purple-400/50 transition-colors">
-                        <div class="absolute top-0 right-0 w-16 h-16 bg-purple-400/5 rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-500"></div>
-                        <div class="flex justify-between items-start mb-1.5">
-                            <p class="text-xs sm:text-sm text-purple-400 font-black tracking-widest uppercase truncate break-all w-full pr-4">T2</p>
-                            <i data-lucide="zap" class="w-4 h-4 text-purple-400/70 shrink-0"></i>
-                        </div>
                         <p class="text-3xl sm:text-4xl font-black text-white">${counts.T2}</p>
-                        <p class="text-[10px] sm:text-xs text-purple-400/60 mt-1.5 leading-snug line-clamp-2">首要一般夥伴</p>
+                        <p class="text-[10px] sm:text-xs text-cyan-400/60 mt-1.5 leading-snug line-clamp-2">常看台 / 互動良好朋友 / 姜太公乾爹身分</p>
                     </div>
                     <!-- T3 -->
                     <div class="bg-gradient-to-b from-[#1c1c21] to-[#141417] border border-white/10 rounded-2xl p-4 flex flex-col relative overflow-hidden group hover:border-gray-400/50 transition-colors">
@@ -532,7 +520,7 @@
             listContainer.innerHTML = '';
 
             // 排序邏輯：1. Live優先 2. 分級權重 3. 同樣分級才比觀看數
-            const rankOrder = { 'T1': 1, 'T2P': 2, 'T2': 3, 'T3': 4 };
+            const rankOrder = { 'T1': 1, 'T2': 2, 'T3': 3 };
             alliesData.sort((a, b) => {
                 if (a.isLive !== b.isLive) return a.isLive ? -1 : 1;
                 if (rankOrder[a.type] !== rankOrder[b.type]) return rankOrder[a.type] - rankOrder[b.type];
@@ -562,11 +550,10 @@
                 // Badges
                 const badgeStyleMap = {
                     'T1': 'badge-t1',
-                    'T2P': 'badge-t2p',
                     'T2': 'badge-t2',
                     'T3': 'badge-t3'
                 };
-                const typeLabel = ally.type === 'T2P' ? 'T2★' : ally.type;
+                const typeLabel = ally.type;
                 const finalBadgeStyle = badgeStyleMap[ally.type]; // 不管是否離線，皆保持分級原始顏色
                 const badgeHtml = `<span class="badge-base ${finalBadgeStyle}">${typeLabel}</span>`;
 
@@ -609,7 +596,14 @@
                                 </div>
                                 <div class="flex flex-col min-w-0">
                                     <span class="font-bold text-gray-100 text-lg md:text-[17px] tracking-wide truncate ${ally.isLive ? '' : 'text-gray-400'}">${ally.name}</span>
-                                    <div class="flex items-center gap-2 mt-0.5 md:hidden">
+                                    <div class="flex items-center gap-1.5 mt-0.5 text-xs text-twitch-accent opacity-90 font-medium whitespace-nowrap overflow-hidden">
+                                        <i data-lucide="users" class="w-3.5 h-3.5 flex-shrink-0"></i> 
+                                        <span class="truncate">${(ally.followers || 0).toLocaleString()} 追隨</span>
+                                        ${ally.followerGrowth > 0 ? `<span class="text-green-400 font-bold tracking-wide flex-shrink-0">(+${ally.followerGrowth.toLocaleString()})</span>` : ''}
+                                        ${ally.followerGrowth < 0 ? `<span class="text-red-400 font-bold tracking-wide flex-shrink-0">(${ally.followerGrowth.toLocaleString()})</span>` : ''}
+                                        ${(ally.followerGrowth === 0 || ally.followerGrowth === undefined) ? `<span class="text-gray-500 font-bold tracking-wide flex-shrink-0">(+0)</span>` : ''}
+                                    </div>
+                                    <div class="flex items-center gap-2 mt-1 md:hidden">
                                         <a href="https://twitch.tv/${ally.id}" target="_blank" class="text-twitch hover:text-twitch-accent hover:underline text-sm flex items-center truncate tracking-wide focus:outline-none">
                                             @${ally.id}
                                         </a>
@@ -708,7 +702,26 @@
                             fetch(`https://api.twitch.tv/helix/streams?user_login=${chunk.join('&user_login=')}`, { headers: { 'Client-ID': API_CONFIG.clientId, 'Authorization': `Bearer ${API_CONFIG.accessToken}` } })
                         ]);
                         const uD = await uRes.json(); const sD = await sRes.json();
-                        if (uD.data) uD.data.forEach(u => userMap[u.login.toLowerCase()] = u.profile_image_url);
+                        
+                        let followersMap = {};
+                        if (uD.data) {
+                            const fPromises = uD.data.map(async u => {
+                                try {
+                                    const fRes = await fetch(`https://api.twitch.tv/helix/channels/followers?broadcaster_id=${u.id}`, { headers: { 'Client-ID': API_CONFIG.clientId, 'Authorization': `Bearer ${API_CONFIG.accessToken}` } });
+                                    if (fRes.ok) {
+                                        const fD = await fRes.json();
+                                        followersMap[u.login.toLowerCase()] = fD.total;
+                                    }
+                                } catch (e) {}
+                            });
+                            await Promise.all(fPromises);
+
+                            uD.data.forEach(u => userMap[u.login.toLowerCase()] = {
+                                avatar: u.profile_image_url,
+                                followers: followersMap[u.login.toLowerCase()] || 0
+                            });
+                        }
+                        
                         if (sD.data) sD.data.forEach(s => {
                             liveInfoMap[s.user_login.toLowerCase()] = {
                                 viewerCount: s.viewer_count
@@ -716,13 +729,42 @@
                         });
                     }
 
+                    // Calculate Monthly Follower Growth using localStorage
+                    const now = new Date();
+                    const monthKey = `follower_history_${now.getFullYear()}_${now.getMonth() + 1}`;
+                    let historyObj = {};
+                    try {
+                        historyObj = JSON.parse(localStorage.getItem(monthKey) || '{}');
+                    } catch(e) {}
+
+                    let needSave = false;
+
                     alliesData.forEach(a => {
                         const lowId = a.id.toLowerCase();
                         const liveInfo = liveInfoMap[lowId];
                         a.isLive = !!liveInfo;
                         a.viewerCount = liveInfo ? liveInfo.viewerCount : 0;
-                        if (userMap[lowId]) a.avatar = userMap[lowId];
+                        if (userMap[lowId]) {
+                            a.avatar = userMap[lowId].avatar;
+                            a.followers = userMap[lowId].followers;
+                        }
+
+                        // Growth calculation
+                        if (a.followers !== undefined) {
+                            if (historyObj[lowId] === undefined) {
+                                historyObj[lowId] = a.followers;
+                                needSave = true;
+                            }
+                            a.followerGrowth = a.followers - historyObj[lowId];
+                        } else {
+                            a.followerGrowth = 0;
+                        }
                     });
+
+                    if (needSave) {
+                        localStorage.setItem(monthKey, JSON.stringify(historyObj));
+                    }
+
                     bar.innerHTML = '<span class="inline-block w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]"></span> <span class="text-green-400 tracking-wider">● 同步成功</span>';
                 } catch (e) {
                     bar.innerHTML = '<span class="text-red-500 tracking-wider flex items-center gap-1"><i data-lucide="alert-triangle" class="w-3 h-3"></i> 連線發生錯誤</span>';
