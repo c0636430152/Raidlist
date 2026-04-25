@@ -331,10 +331,15 @@
                                     class="relative z-10 text-white font-black px-1.5">正在開台</span><span
                                     class="absolute bottom-1 left-0 w-full h-2.5 bg-twitch/80 -z-10 rounded-sm"></span></span>
                             的盟友置頂。
-                            <span class="text-base md:text-lg text-gray-400 font-medium block mt-1">請優先揪團給位於正在開台的夥伴，若都沒人可以自己決定 🔥 按照分級T1、T2、T3，找在線50人以下的優先揪</span>
-                            <span class="text-[10px] md:text-xs text-gray-500 font-medium mt-2.5 flex items-center gap-1.5 opacity-70">
+                            <span
+                                class="text-base md:text-lg text-gray-400 font-medium block mt-1">請優先揪團給位於正在開台的夥伴，若都沒人可以自己決定
+                                🔥 按照分級T1、T2、T3，找在線50人以下的優先揪</span>
+                            <span
+                                class="text-[10px] md:text-xs text-gray-500 font-medium mt-2.5 flex items-center gap-1.5 opacity-70">
                                 <i data-lucide="info" class="w-3 h-3"></i>
-                                <span>註：括號內的數字 <span class="text-twitch-accent font-bold px-1 bg-twitch-accent/5 rounded border border-twitch-accent/10 whitespace-nowrap">(+)</span> 代表「本月新增追隨人數」。</span>
+                                <span>註：括號內的數字 <span
+                                        class="text-twitch-accent font-bold px-1 bg-twitch-accent/5 rounded border border-twitch-accent/10 whitespace-nowrap">(+)</span>
+                                    代表「本月新增追隨人數」。</span>
                             </span>
                         </p>
                     </div>
@@ -702,7 +707,7 @@
                             fetch(`https://api.twitch.tv/helix/streams?user_login=${chunk.join('&user_login=')}`, { headers: { 'Client-ID': API_CONFIG.clientId, 'Authorization': `Bearer ${API_CONFIG.accessToken}` } })
                         ]);
                         const uD = await uRes.json(); const sD = await sRes.json();
-                        
+
                         let followersMap = {};
                         if (uD.data) {
                             const fPromises = uD.data.map(async u => {
@@ -712,7 +717,7 @@
                                         const fD = await fRes.json();
                                         followersMap[u.login.toLowerCase()] = fD.total;
                                     }
-                                } catch (e) {}
+                                } catch (e) { }
                             });
                             await Promise.all(fPromises);
 
@@ -721,7 +726,7 @@
                                 followers: followersMap[u.login.toLowerCase()] || 0
                             });
                         }
-                        
+
                         if (sD.data) sD.data.forEach(s => {
                             liveInfoMap[s.user_login.toLowerCase()] = {
                                 viewerCount: s.viewer_count
@@ -735,7 +740,7 @@
                     let historyObj = {};
                     try {
                         historyObj = JSON.parse(localStorage.getItem(monthKey) || '{}');
-                    } catch(e) {}
+                    } catch (e) { }
 
                     let needSave = false;
 
