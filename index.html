@@ -238,11 +238,13 @@
             border: 1px solid rgba(145, 70, 255, 0.15);
             box-shadow: 0 0 20px rgba(145, 70, 255, 0.1);
         }
+
         /* Tier Card Styles */
         .card-tier-t1 {
             background: rgba(250, 204, 21, 0.05) !important;
             border-left: 4px solid rgba(250, 204, 21, 0.4) !important;
         }
+
         .card-tier-t1:hover {
             background: rgba(250, 204, 21, 0.09) !important;
             border-left: 4px solid rgba(250, 204, 21, 0.8) !important;
@@ -252,6 +254,7 @@
             background: rgba(34, 211, 238, 0.05) !important;
             border-left: 4px solid rgba(34, 211, 238, 0.4) !important;
         }
+
         .card-tier-t2:hover {
             background: rgba(34, 211, 238, 0.09) !important;
             border-left: 4px solid rgba(34, 211, 238, 0.8) !important;
@@ -261,6 +264,7 @@
             background: rgba(156, 163, 175, 0.03) !important;
             border-left: 4px solid rgba(156, 163, 175, 0.2) !important;
         }
+
         .card-tier-t3:hover {
             background: rgba(156, 163, 175, 0.06) !important;
             border-left: 4px solid rgba(156, 163, 175, 0.5) !important;
@@ -306,7 +310,7 @@
                             </h1>
                             <span
                                 class="hidden sm:flex items-center gap-1 bg-twitch/20 text-twitch-accent border border-twitch/30 px-3 py-1 rounded-full text-sm font-bold shadow-[0_0_15px_rgba(145,70,255,0.2)]">
-                                <i data-lucide="users" class="w-4 h-4"></i> 76位人員
+                                <i data-lucide="users" class="w-4 h-4"></i> 77位人員
                             </span>
                         </div>
                         <div id="status-bar"
@@ -365,23 +369,25 @@
                                 class="text-base md:text-lg text-gray-400 font-medium block mt-1">請優先揪團給位於正在開台的夥伴，若都沒人可以自己決定
                                 🔥 按照分級T1、T2、T3，找在線50人以下的優先揪</span>
 
-                            <div class="mt-4 p-4 rounded-2xl bg-white/[0.03] border border-white/5 group-hover:border-twitch-accent/20 transition-colors">
-                                <div class="flex items-center gap-2 mb-2 text-twitch-accent/80">
-                                    <i data-lucide="message-square" class="w-4 h-4"></i>
-                                    <span class="text-xs font-black tracking-widest uppercase">Raid Suggested Speech (揪團說詞)</span>
-                                </div>
-                                <p class="text-sm md:text-base text-gray-300 font-medium italic leading-relaxed">
-                                    「 時間差不多要下播了，滿無聊的，想找個新台或小台來『震撼教育』一下，進攻炸他們台，看對方結巴或驚慌失措的有趣反應。」
-                                </p>
+                        <div
+                            class="mt-4 p-4 rounded-2xl bg-white/[0.03] border border-white/5 group-hover:border-twitch-accent/20 transition-colors">
+                            <div class="flex items-center gap-2 mb-2 text-twitch-accent/80">
+                                <i data-lucide="message-square" class="w-4 h-4"></i>
+                                <span class="text-xs font-black tracking-widest uppercase">Raid Suggested Speech
+                                    (揪團說詞)</span>
                             </div>
+                            <p class="text-sm md:text-base text-gray-300 font-medium italic leading-relaxed">
+                                「 時間差不多要下播了，滿無聊的，想找個新台或小台來『震撼教育』一下，進攻炸他們台，看對方結巴或驚慌失措的有趣反應。」
+                            </p>
+                        </div>
 
-                            <span
-                                class="text-[10px] md:text-xs text-gray-500 font-medium mt-4 flex items-center gap-1.5 opacity-70">
-                                <i data-lucide="info" class="w-3 h-3"></i>
-                                <span>註：括號內的數字 <span
-                                        class="text-twitch-accent font-bold px-1 bg-twitch-accent/5 rounded border border-twitch-accent/10 whitespace-nowrap">(+)</span>
-                                    代表「本月新增追隨人數」。</span>
-                            </span>
+                        <span
+                            class="text-[10px] md:text-xs text-gray-500 font-medium mt-4 flex items-center gap-1.5 opacity-70">
+                            <i data-lucide="info" class="w-3 h-3"></i>
+                            <span>註：括號內的數字 <span
+                                    class="text-twitch-accent font-bold px-1 bg-twitch-accent/5 rounded border border-twitch-accent/10 whitespace-nowrap">(+)</span>
+                                代表「本月新增追隨人數」。</span>
+                        </span>
                         </p>
                     </div>
                 </div>
@@ -390,12 +396,14 @@
             <!-- 搜尋欄 -->
             <div class="mb-8 relative group">
                 <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-                    <i data-lucide="search" class="w-5 h-5 text-gray-500 group-focus-within:text-twitch-accent transition-colors"></i>
+                    <i data-lucide="search"
+                        class="w-5 h-5 text-gray-500 group-focus-within:text-twitch-accent transition-colors"></i>
                 </div>
-                <input type="text" id="search-input" placeholder="搜尋實況主名稱、ID 或備註關鍵字..." 
+                <input type="text" id="search-input" placeholder="搜尋實況主名稱、ID 或備註關鍵字..."
                     class="w-full bg-[#18181b]/80 border border-white/5 focus:border-twitch-accent/50 focus:ring-1 focus:ring-twitch-accent/20 rounded-2xl py-4 pl-14 pr-4 text-white placeholder-gray-500 outline-none transition-all backdrop-blur-xl shadow-2xl"
                     oninput="handleSearch()">
-                <div id="search-count" class="absolute inset-y-0 right-0 pr-5 flex items-center text-xs font-bold text-twitch-accent pointer-events-none tracking-widest">
+                <div id="search-count"
+                    class="absolute inset-y-0 right-0 pr-5 flex items-center text-xs font-bold text-twitch-accent pointer-events-none tracking-widest">
                 </div>
             </div>
 
@@ -443,13 +451,13 @@
         const API_CONFIG = { clientId: '3llrahqqu4s0gi17eehtoft8g60may', clientSecret: 'dyvy4obvo5p8yu0p01h8cvayjji4yf', accessToken: null };
 
         const alliesData = [
-            // T1 (38人)
+            // T1 (36人)
             { name: "一顆歡茄", id: "meitoo85", intro: "主要玩APEX+LOL+心動小鎮。互動良好、脾氣很好，不漏留言。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "一顆地呱", id: "a12360107", intro: "戶外台。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "巨跟萌妹", id: "xivxy", intro: "瓦羅蘭。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "兔妮毛球", id: "xmaoqiux", intro: "主要燕雲十六聲。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "毛毛躁躁", id: "maomao77777", intro: "LOL(實況邊緣人)。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "粉紅牛逼狗", id: "bandso2000", intro: "LOL(實況邊緣人 )。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "粉紅牛逼狗", id: "bandso2000", intro: "LOL(實況邊緣人 )。", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "牛奶凌", id: "chiiling04", intro: "瓦羅蘭。與芊妘妘妘關係良好。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "王爆豪", id: "gjesst4628", intro: "楓之谷、戰旗(棄坑)。姜太公軍師。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "摸尼", id: "mori1028", intro: "楓之谷(實況邊緣人)。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
@@ -459,7 +467,7 @@
             { name: "窩4橘毛", id: "orangemao", intro: "瓦羅蘭，人脈良好。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "肉先生", id: "ggsod", intro: "雜談高手，好相處。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "詩詩44", id: "shishichuchu", intro: "滑雪教練。具備合作意識與個人主見。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "落花花", id: "a0411utumn", intro: "懂人情世故，擅長交際。瓦羅蘭為主。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "落花花", id: "a0411utumn", intro: "懂人情世故，擅長交際。瓦羅蘭為主。", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "乃萬在台第一迷弟", id: "johnny2562440", intro: "LOL台。毛毛躁躁的資深觀眾。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "厭世三星蔥", id: "kouyifu", intro: "正在轉職繪師。瓦羅蘭台。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "瑟芹寶抓兔兔", id: "catchbunny", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
@@ -481,9 +489,9 @@
             { name: "王鶺鶒", id: "lingling0045", intro: "主要是策略。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "南極哥", id: "wsx70529", intro: "主要是策略。", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
             { name: "其實我叫哈蜜瓜", id: "hamiguaa", intro: "-", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "妃寶寶", id: "dada6621", intro: "也是戶外台 有幫助", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "妃寶寶", id: "dada6621", intro: "身障人士 有一位男友協助她 每週 固定戶外台 好像是六日不太確定 脾氣好的主播 對觀眾都友善 室內台 開長時間", type: "T1", isLive: false, avatar: "", viewerCount: 0 },
 
-            // T2 (28人)
+            // T2 (30人)
             { name: "乃教練", id: "a1000281", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "苒苒です", id: "ranran1019", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
             { name: "貓貓隊長", id: "aumimimi", intro: "-", type: "T2", isLive: false, avatar: "", viewerCount: 0 },
@@ -517,13 +525,14 @@
             { name: "琳琳_", id: "tychelin", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "芊芊芊芊芊", id: "qiannnzl", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "年糕喵", id: "aas0220", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "莓莓丶", id: "omimimimi123", intro: "備用：alisa4524", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "莓莓", id: "oichigo", intro: "備用：alisa4524", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "嘟桑", id: "amidodo_", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "我是林木木", id: "xmoooomx", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "柚花籽", id: "yuukaha", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "早安傑米", id: "jamie_oovoo", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
             { name: "起司帕尼尼", id: "sawaa0816", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
-            { name: "hahahe0304", id: "hahahe0304", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 }
+            { name: "hahahe0304", id: "hahahe0304", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 },
+            { name: "miemie229", id: "miemie229", intro: "-", type: "T3", isLive: false, avatar: "", viewerCount: 0 }
         ];
 
         let searchQuery = "";
@@ -585,8 +594,8 @@
             listContainer.innerHTML = '';
 
             // 搜尋過濾
-            const filteredData = alliesData.filter(a => 
-                a.name.toLowerCase().includes(searchQuery) || 
+            const filteredData = alliesData.filter(a =>
+                a.name.toLowerCase().includes(searchQuery) ||
                 a.id.toLowerCase().includes(searchQuery) ||
                 (a.intro && a.intro.toLowerCase().includes(searchQuery))
             );
@@ -638,7 +647,7 @@
                 // Raid History Info
                 const history = JSON.parse(localStorage.getItem('raid_history_v2') || '{}');
                 const lastRaidTime = history[ally.id.toLowerCase()];
-                const raidInfoHtml = lastRaidTime 
+                const raidInfoHtml = lastRaidTime
                     ? `<div class="flex items-center gap-1 text-[10px] text-twitch-accent/60 font-bold uppercase mt-1">
                            <i data-lucide="zap" class="w-2.5 h-2.5"></i>
                            <span>最後揪團：${getTimeAgo(lastRaidTime)}</span>
@@ -893,12 +902,12 @@
             const history = JSON.parse(localStorage.getItem('raid_history_v2') || '{}');
             const sorted = Object.entries(history).sort((a, b) => b[1] - a[1]);
             const banner = document.getElementById('latest-raid-banner');
-            
+
             if (sorted.length > 0) {
                 const [id, time] = sorted[0];
                 const ally = alliesData.find(a => a.id.toLowerCase() === id.toLowerCase());
                 const name = ally ? ally.name : id;
-                
+
                 banner.innerHTML = `
                     <div class="inline-flex items-center gap-2 py-1 px-3 bg-twitch/10 border border-twitch/20 rounded-lg">
                         <span class="flex h-2 w-2 relative">
@@ -919,12 +928,12 @@
             event.stopPropagation();
 
             const textToCopy = '/raid ' + id;
-            
+
             // Save to history
             const history = JSON.parse(localStorage.getItem('raid_history_v2') || '{}');
             history[id.toLowerCase()] = new Date().getTime();
             localStorage.setItem('raid_history_v2', JSON.stringify(history));
-            
+
             // Refresh UI to show last raid time
             renderUI();
 
